@@ -5,85 +5,39 @@ import {
   Text,
   Image,
   Group,
-  SimpleGrid,
   Card,
   Badge,
   Button,
   Anchor,
+  Pagination,
   Divider,
   TextInput,
+  Modal,
   Menu
 } from "@mantine/core";
-import { IconBrandFacebook, IconMail,  IconUserCircle, IconCalendar } from "@tabler/icons-react";
-import { Link, useNavigate } from "react-router-dom";
-import Lvlogowhitebg from "../assets/Lvlogowhitebg.png";
+import {
+  IconMail,
+  IconLock,
+  IconLogout,
+  IconUserCircle,
+  IconKey,
+  IconBrandFacebook,
+} from "@tabler/icons-react";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import header3 from "../assets/header3.png";
 import { IconSearch, IconX } from "@tabler/icons-react";
 import { ActionIcon } from "@mantine/core";
-import { useState } from "react";
+import Lvlogowhitebg from "../assets/Lvlogowhitebg.png";
 import Lvherald from "../assets/Lvherald.png";
-import header3 from "../assets/header3.png";
+import sung from "../assets/sung.webp";
 import bgfooter from "../assets/bgfooter.png";
-import mainImage from "../assets/ImageHolder1.png";
+import ImageHolder4 from "../assets/ImageHolder4.png";
+import ImageHolder5 from "../assets/ImageHolder5.png";
+import ImageHolder6 from "../assets/ImageHolder6.png";
 
-export default function ArticlePage() {
-  const navigate = useNavigate();
 
-  const mainArticle = {
-    id: 1,
-    title: "World Teachers’ Day 2025: Honoring the Light of Learning",
-    author: "John Michael Santos",
-    date: "October 5, 2025",
-    image: mainImage,
-    category: "NEWS",
-    description:
-      "La Verdad Christian College celebrates World Teachers’ Day 2025, recognizing the unwavering dedication and passion of educators who continue to shape the future with knowledge and compassion.",
-  };
-
-  const otherArticles = [
-    {
-      id: 2,
-      title: "LVCC Launches New Community Literacy Program",
-      author: "Anna Grace Dela Cruz",
-      date: "October 1, 2025",
-      image: mainImage,
-      category: "FEATURES",
-      description:
-        "The new literacy initiative aims to reach underserved communities and promote education for all.",
-    },
-    {
-      id: 3,
-      title: "Campus Journalism Summit 2025 Highlights Student Voices",
-      author: "Reanne Kate Esguerra",
-      date: "September 25, 2025",
-      image: mainImage,
-      category: "SPECIALS",
-      description:
-        "Student journalists from across the country gathered to discuss the power of storytelling in shaping truth.",
-    },
-    {
-      id: 4,
-      title: "LVCC Holds Annual Sports Festival",
-      author: "James Mendoza",
-      date: "September 15, 2025",
-      image: mainImage,
-      category: "SPORTS",
-      description:
-        "A week-long celebration of teamwork, athleticism, and school spirit filled the LVCC campus with energy.",
-    },
-    {
-      id: 5,
-      title: "Editorial: The Value of Truth in Modern Media",
-      author: "Editorial Board",
-      date: "August 30, 2025",
-      image: mainImage,
-      category: "OPINION",
-      description:
-        "Amid misinformation, the pursuit of truth remains the foundation of responsible journalism.",
-    },
-  ];
-  
-  const [showSearch, setShowSearch] = useState(false);
-
+export default function UserProfile() {
   const navLinks = [
     "NEWS",
     "SPORTS",
@@ -96,9 +50,91 @@ export default function ArticlePage() {
     "CONTACT US",
   ];
 
-        {/* ================= HEADER ================= */}
+  const sharedArticles = [
+    {
+      id: 1,
+      category: "LITERARY",
+      title: "The Ones Who Light Our Path",
+      author: "Kierch Taguinlin",
+      date: "October 17, 2025 at 2:56 PM",
+      image: ImageHolder4,
+      excerpt:
+        "The room was silent except for the sound of our heavy sighs when our professor broke the silence...",
+    },
+    {
+      id: 2,
+      category: "LITERARY",
+      title: "The Operator",
+      author: "Maria Geraldine Ciosa",
+      date: "October 15, 2025 at 8:04 AM",
+      image: ImageHolder5,
+      excerpt:
+        "Inside the hum of progress, someone turns the unseen gears. A quiet hand aligns the pipes of wisdom...",
+    },
+    {
+      id: 3,
+      category: "LITERARY",
+      title: "The Capes Behind The Bloom",
+      author: "Trixie Sarmiento",
+      date: "October 14, 2025 at 5:42 PM",
+      image: ImageHolder6,
+      excerpt:
+        "When a flower blooms, would you praise it for growing, or would you appreciate the environment that allowed it?",
+    },
+  ];
+
+  
+const likedArticles = [
+  {
+    id: 1,
+    category: "NEWS",
+    title: "Campus Week Highlights",
+    author: "M. De Vera",
+    date: "October 20, 2025 at 3:12 PM",
+    image: ImageHolder4,
+    excerpt: "La Verdad Christian College celebrates excellence and unity during Campus Week...",
+  },
+  {
+    id: 2,
+    category: "SPORTS",
+    title: "Herald Wins Press Conference",
+    author: "A. Soriano",
+    date: "October 18, 2025 at 11:40 AM",
+    image: ImageHolder5,
+    excerpt: "The Herald staff emerged victorious at the Regional Press Conference...",
+  },
+  {
+    id: 3,
+    category: "FEATURES",
+    title: "Voices Behind the Mic",
+    author: "C. Ramirez",
+    date: "October 16, 2025 at 6:05 PM",
+    image:  ImageHolder6,
+    excerpt: "Exploring the passion and dedication of LVCC’s student broadcasters...",
+  },
+];
+
+  const [opened, setOpened] = useState(false);
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showSearch, setShowSearch] = useState(false);
+
+  const handleChangePassword = () => {
+    if (newPassword !== confirmPassword) {
+      alert("Password do not match!");
+      return;
+    }
+    alert("Password changed successfully!");
+    setOpened(false);
+    setOldPassword("");
+    setNewPassword("");
+    setConfirmPassword("");
+  };
+
   return (
     <Box>
+      {/* ================= HEADER ================= */}
       <Box pos="relative" bg="#1e4b63" c="white" py="md">
         <Image
           src={header3}
@@ -170,7 +206,6 @@ export default function ArticlePage() {
                 </Menu.Dropdown>
               </Menu>
             </Group>
-
           </Box>
         </Container>
       </Box>
@@ -246,126 +281,186 @@ export default function ArticlePage() {
         </Container>
       </Box>
 
-      {/* ================= MAIN ARTICLE ================= */}
-      <Container size="md" py="xl" style={{ textAlign: "left" }}>
-        <Badge color="blue" mb="sm" radius="sm">
-          {mainArticle.category}
-        </Badge>
 
-        <Title
-          order={1}
-          fw={900}
-          mb="sm"
-          c="#1e4b63"
-          style={{
-            fontSize: "clamp(28px, 4vw, 50px)",
-            lineHeight: 1.2,
-          }}
-        >
-          {mainArticle.title}
-        </Title>
+      {/* ================= MAIN CONTENT ================= */}
+      <Container size="xl" py="xl">
+        <Group align="flex-start" spacing="xl">
+          {/* LEFT SIDEBAR */}
+          <Box
+            w={360}
+            p="lg"
+            bg="white"
+            style={{
+              borderRadius: 10,
+              boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+            }}
+          >
+            <Group position="center" justify="center" align="center" mb="md">
+              <Image
+                src={sung}
+                alt="User Logo"
+                radius="50%"
+                w={120}
+                h={120}
+                style={{
+                  objectFit: "cover",
+                  borderRadius: "50%",
+                }}
+              />
+            </Group>
 
-        <Text size="sm" c="dimmed" mb="md">
-          By {mainArticle.author}
-        </Text>
+            <Title order={4} ta="center">
+              Ramirez Juan Miguel
+            </Title>
+            <Text ta="center" c="dimmed" fz="sm" mb="lg">
+              Joined November 2, 2025
+            </Text>
 
-        <Group justify="space-between" align="center" mb="md" w="100%">
-          <Text size="sm" c="dimmed">
-            {mainArticle.date}
-          </Text>
+            <Divider my="sm" />
 
-          <Group gap="xs" wrap="wrap" style={{ marginLeft: "auto" }}>
-            {["#WorldTeachersDay2025", "#WTD2025", "#LVCCTeachers", "#LVCC"].map(
-              (tag) => (
-                <Badge key={tag} variant="light" color="gray">
-                  {tag}
-                </Badge>
-              )
-            )}
-          </Group>
-        </Group>
+            <Group gap="xs" mb="sm">
+              <IconMail size={18} />
+              <Text size="sm">juanmiguelramirez@student.laverdad.edu.ph</Text>
+            </Group>
 
-        <Card
-          shadow="sm"
-          radius="md"
-          withBorder
-          mb="md"
-          onClick={() => navigate(`/article/${mainArticle.id}`)}
-          style={{
-            cursor: "pointer",
-            transition: "transform 0.2s ease",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.01)")}
-          onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-        >
-          <Card.Section>
-            <Image src={mainArticle.image} alt={mainArticle.title} fit="cover" />
-          </Card.Section>
-        </Card>
+            <Group justify="space-between" align="center" mb="sm">
+              <Group gap="xs">
+                <IconLock size={25} />
+                <Text size="sm">Password</Text>
+              </Group>
 
-        <Container size="sm">
-          <Text size="md" mb="md" lh={1.6}>
-            {mainArticle.description}
-          </Text>
-        </Container>
-      </Container>
+              <Button
+                size="md"
+                variant="light"
+                leftSection={<IconKey size={25} />}
+                onClick={() => setOpened(true)}
+              >
+                Change Password
+              </Button>
+            </Group>
 
-      {/* ================= OTHER ARTICLES ================= */}
-      <Container size="lg" py="xl" maw={1200}>
-        <Title order={4} align="center" mb="lg" fw={700} c="#1e4b63">
-          More from this Category
-        </Title>
+            <Text size="xs" c="dimmed" mb="md">
+              Last configured: 10/22/2025
+            </Text>
 
-        <SimpleGrid cols={{ base: 1, sm: 2, md: 3, lg: 4 }} spacing="md" justify="center">
-          {otherArticles.map((article) => (
-            <Card
-              key={article.id}
-              withBorder
-              shadow="md"
-              radius="md"
-              p="sm"
-              onClick={() => navigate(`/article/${article.id}`)}
-              style={{
-                cursor: "pointer",
-                transition: "transform 0.2s ease, box-shadow 0.2s ease",
-                height: "100%",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "scale(1.02)";
-                e.currentTarget.style.boxShadow = "0 8px 20px rgba(0,0,0,0.15)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "scale(1)";
-                e.currentTarget.style.boxShadow = "none";
-              }}
-            >
-              <Card.Section>
-                <Image src={article.image} height={200} alt={article.title} fit="cover" />
-              </Card.Section>
-              <Badge mt="sm" color="blue" radius="sm">
-                {article.category}
-              </Badge>
-              <Title order={4} mt="sm" mb="xs">
-                {article.title}
-              </Title>
-              <Text size="sm" c="dimmed" lineClamp={3}>
-                {article.description}
-              </Text>
-              <Divider my="sm" />
-              <Group justify="space-between" align="center">
-                <Text size="xs" c="dimmed">
-                  {article.author}
-                </Text>
-                <Group gap={4}>
-                  <IconCalendar size={14} />
-                  <Text size="xs" c="dimmed">
+            <Button fullWidth color="gray" variant="outline" mb="md">
+              <IconLogout size={16} style={{ marginRight: 6 }} /> Log Out
+            </Button>
+
+            <Text c="red" fz="sm" fw={500}>
+              Delete Account
+            </Text>
+            <Text c="dimmed" fz="xs" mb="xs">
+              Deleting your account will permanently erase all associated data,
+              including your profile, liked articles, and shared content. This
+              action cannot be undone.
+            </Text>
+            <Button color="red" fullWidth variant="light">
+              Delete Account
+            </Button>
+          </Box>
+
+          {/* RIGHT CONTENT */}
+          <Box style={{ flex: 1 }}>
+            {/* Shared Articles */}
+            <Title order={3} mb="md">
+              Shared Articles | 3
+            </Title>
+
+            <Group grow align="stretch" mb="xl">
+              {sharedArticles.map((article) => (
+                <Card
+                  key={article.id}
+                  shadow="sm"
+                  radius="md"
+                  withBorder
+                  style={{
+                    cursor: "pointer",
+                    transition: "transform 0.2s ease",
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.transform = "scale(1.01)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.transform = "scale(1)")
+                  }
+                >
+                  <Card.Section>
+                    <Image src={article.image} height={150} fit="cover" />
+                  </Card.Section>
+                  <Badge color="green" mt="sm" mb="xs">
+                    {article.category}
+                  </Badge>
+                  <Text fw={600} mb={4}>
+                    {article.title}
+                  </Text>
+                  <Text size="xs" c="dimmed" mb="xs">
                     {article.date}
                   </Text>
-                </Group>
-              </Group>
-            </Card>
-          ))}
-        </SimpleGrid>
+                  <Text size="sm" c="dimmed" lineClamp={2}>
+                    {article.excerpt}
+                  </Text>
+                  <Text size="xs" mt="xs" c="blue">
+                    {article.author}
+                  </Text>
+                </Card>
+              ))}
+            </Group>
+
+            <Group justify="center" mb="xl">
+              <Pagination total={3} value={1} />
+            </Group>
+
+            {/* Liked Articles */}
+            <Title order={3} mb="md">
+              Liked Articles | 6
+            </Title>
+
+            <Group grow align="stretch" mb="xl">
+              {sharedArticles.map((article) => (
+                <Card
+                  key={article.id}
+                  shadow="sm"
+                  radius="md"
+                  withBorder
+                  style={{
+                    cursor: "pointer",
+                    transition: "transform 0.2s ease",
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.transform = "scale(1.01)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.transform = "scale(1)")
+                  }
+                >
+                  <Card.Section>
+                    <Image src={article.image} height={150} fit="cover" />
+                  </Card.Section>
+                  <Badge color="green" mt="sm" mb="xs">
+                    {article.category}
+                  </Badge>
+                  <Text fw={600} mb={4}>
+                    {article.title}
+                  </Text>
+                  <Text size="xs" c="dimmed" mb="xs">
+                    {article.date}
+                  </Text>
+                  <Text size="sm" c="dimmed" lineClamp={2}>
+                    {article.excerpt}
+                  </Text>
+                  <Text size="xs" mt="xs" c="blue">
+                    {article.author}
+                  </Text>
+                </Card>
+              ))}
+            </Group>
+
+            <Group justify="center">
+              <Pagination total={2} value={1} />
+            </Group>
+          </Box>
+        </Group>
       </Container>
 
       {/* ================= FOOTER ================= */}
@@ -407,11 +502,24 @@ export default function ArticlePage() {
               }}
             >
               <Group align="center" mb="xs" gap="sm" wrap="nowrap" justify="center">
-                <Image src={Lvlogowhitebg} alt="La Verdad Herald Logo" w={100} h={100} fit="contain" />
-                <Image src={Lvherald} alt="La Verdad Herald Text" w={250} h={100} fit="contain" />
+                <Image
+                  src={Lvlogowhitebg}
+                  alt="La Verdad Herald Logo"
+                  w={100}
+                  h={100}
+                  fit="contain"
+                />
+                <Image
+                  src={Lvherald}
+                  alt="La Verdad Herald Text"
+                  w={250}
+                  h={100}
+                  fit="contain"
+                />
               </Group>
               <Text size="md" mb="md" lh={1.6} style={{ textAlign: "left" }}>
-                The <b>LA VERDAD HERALD</b> is the Official Higher Education Student Publication of La Verdad Christian College, Inc.
+                The <b>LA VERDAD HERALD</b> is the Official Higher Education Student
+                Publication of La Verdad Christian College, Inc.
               </Text>
             </Box>
 
@@ -448,7 +556,8 @@ export default function ArticlePage() {
             <Box>
               <Group align="center" justify="flex-end" gap="sm">
                 <Text fz="xs">
-                  Never miss a story. Subscribe for email updates from <b>La Verdad Herald.</b>
+                  Never miss a story. Subscribe for email updates from{" "}
+                  <b>La Verdad Herald.</b>
                 </Text>
                 <Group gap={0}>
                   <TextInput
@@ -516,7 +625,8 @@ export default function ArticlePage() {
           </Group>
 
           <Text ta="center" size="md" c="white" mt="xs">
-            © 2025 La Verdad Herald – La Verdad Christian College Apalit. All rights reserved.
+            © 2025 La Verdad Herald – La Verdad Christian College Apalit. All rights
+            reserved.
           </Text>
         </Container>
       </Box>

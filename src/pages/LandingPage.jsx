@@ -31,7 +31,7 @@ export default function LandingPage() {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
   const [opened, setOpened] = useState(false);
-  const [mode, setMode] = useState("login"); // "login" or "signup"
+   const [mode, setMode] = useState("login");
 
   const articles = [
     {
@@ -129,11 +129,11 @@ export default function LandingPage() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "flex-end", // buttons sit near bottom
+          justifyContent: "flex-end",
           textAlign: "center",
           position: "relative",
           zIndex: 1,
-          paddingBottom: "80px", // spacing from bottom
+          paddingBottom: "80px",
         }}
       >
         <Group justify="center" spacing="md">
@@ -198,62 +198,88 @@ export default function LandingPage() {
         </Group>
       </Box>
 
-      {/* LOGIN/SIGNUP MODAL */}
+      {/* LOGIN/SIGNUP MODAL (NEW DESIGN) */}
       <Modal
         opened={opened}
         onClose={() => setOpened(false)}
         centered
+        withCloseButton={false}
+        overlayProps={{ backgroundOpacity: 0.6, blur: 3 }}
         size="sm"
-        withCloseButton
-        overlayProps={{ backgroundOpacity: 0.5, blur: 3 }}
-        zIndex={9999}
+        radius="md"
       >
         <Box
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            backgroundColor: "white",
+            borderRadius: "10px",
+            boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2)",
+            padding: "2rem 2.5rem",
             textAlign: "center",
-            gap: "1rem",
-            padding: "1.5rem",
           }}
         >
-          <Title order={3} c="blue.9" mb="md">
-            {mode === "login" ? "Log In" : "Sign Up"}
+          <Title
+            order={3}
+            mb="lg"
+            style={{
+              fontFamily: "Georgia, serif",
+              fontWeight: "500",
+              color: "#1e1e1e",
+            }}
+          >
+            {mode === "login" ? "Login" : "Sign Up"}
           </Title>
 
           {mode === "signup" && (
-            <TextInput label="Username" placeholder="Enter your username" w="100%" />
+            <TextInput placeholder="Username" w="100%" mb="sm" required />
           )}
-          <TextInput label="Email" placeholder="Enter your email" w="100%" />
+
+          <TextInput placeholder="Email address" w="100%" mb="sm" required />
           <TextInput
-            label="Password"
             type="password"
-            placeholder="Enter your password"
+            placeholder="Password"
             w="100%"
+            mb="md"
+            required
           />
 
           <Button
             fullWidth
-            onClick={mode === "login" ? handleLogin : handleSignup}
             color="blue"
-            mt="md"
+            radius="xl"
+            onClick={mode === "login" ? handleLogin : handleSignup}
+            style={{
+              backgroundColor: "#1e4b63",
+              fontWeight: 600,
+              marginBottom: "0.5rem",
+            }}
           >
-            {mode === "login" ? "Log In" : "Sign Up"}
+            {mode === "login" ? "Log in" : "Sign Up"}
           </Button>
 
-          <Text mt="sm">
+          <Text size="sm" c="dimmed" mb="sm">
+            or
+          </Text>
+
+          <Text size="sm">
             {mode === "login" ? (
               <>
-                Don't have an account?{" "}
-                <Anchor component="button" onClick={() => setMode("signup")}>
+                Don’t have an account?{" "}
+                <Anchor
+                  component="button"
+                  onClick={() => setMode("signup")}
+                  style={{ color: "#1e4b63", fontWeight: 500 }}
+                >
                   Sign Up
                 </Anchor>
               </>
             ) : (
               <>
                 Already have an account?{" "}
-                <Anchor component="button" onClick={() => setMode("login")}>
+                <Anchor
+                  component="button"
+                  onClick={() => setMode("login")}
+                  style={{ color: "#1e4b63", fontWeight: 500 }}
+                >
                   Log In
                 </Anchor>
               </>
@@ -375,7 +401,6 @@ export default function LandingPage() {
           gap="xl"
           style={{ position: "relative", zIndex: 1 }}
         >
-          {/* Left side logo & description */}
           <Box
             style={{
               maxWidth: 450,
@@ -395,7 +420,6 @@ export default function LandingPage() {
             </Text>
           </Box>
 
-          {/* Center navigation links */}
           <Box ta="center">
             <Group gap="xl" mb="xs" justify="center">
               {["NEWS","SPORTS","OPINION","LITERARY","FEATURES","SPECIALS","ART","ABOUT","REACH OUT"].map(
@@ -416,7 +440,6 @@ export default function LandingPage() {
             </Group>
           </Box>
 
-          {/* Right subscribe */}
           <Box>
             <Group align="center" justify="flex-end" spacing="sm" noWrap>
               <Text fz="xs" lh={1.4} style={{ whiteSpace: "nowrap" }}>
@@ -457,10 +480,8 @@ export default function LandingPage() {
           </Box>
         </Group>
 
-        {/* Divider */}
         <Box my="md" style={{ height: "1px", backgroundColor: "rgba(255,255,255,0.3)" }} />
 
-        {/* Social icons */}
         <Group justify="center" mb="xs">
           <Button
             variant="subtle"
@@ -482,7 +503,7 @@ export default function LandingPage() {
           </Button>
         </Group>
 
-        <Text ta="center" size="xs" c="white" mt="xs">
+        <Text ta="center" size="md" c="white" mt="xs">
           © 2025 La Verdad Herald – La Verdad Christian College Apalit. All rights reserved.
         </Text>
       </Box>

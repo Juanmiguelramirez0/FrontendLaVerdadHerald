@@ -5,7 +5,7 @@ Frontend La Verdad Herald
 # Frontend-LaVerdadHerald
 =======
 # React + Vite
-![Landing Page](src/assets/landingpage.png)
+
 git add README.md
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

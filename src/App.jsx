@@ -16,6 +16,10 @@ import Art from './nav-header/Art.jsx';
 import Feature from './nav-header/Feature.jsx';
 import Sports from './nav-header/Sports.jsx';
 import About from './nav-header/About.jsx';
+// import Showarticles from './pages/ShowArticles.jsx';
+import MyHeader from './components/MyHeader.jsx';
+import UserProfile from './pages/UserProfile.jsx';
+
 
 function App() {
 
@@ -38,6 +42,10 @@ function App() {
           <Route path="/contactus" element={<Contact />} />
           <Route path="/landingpage" element={<LandingPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          {/* <Route path="/showarticles" element={<Showarticles />} /> */}
+          <Route path="/header" element={<MyHeader />} />
+          <Route path="/userprofile" element={<UserProfile />} />
+
         </Routes>
       </BrowserRouter>
     </MantineProvider>
