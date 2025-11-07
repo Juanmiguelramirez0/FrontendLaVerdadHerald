@@ -1,98 +1,199 @@
-// src/Pages/Showarticles.jsx
 import {
+  Box,
   Container,
   Title,
-  Text,
-  Image,
-  Group,
+  TextInput,
+  SimpleGrid,
   Card,
-  Divider,
-  Anchor,
-  Box,
+  Text,
+  Group,
+  Badge,
+  Image,
 } from "@mantine/core";
-import { IconCalendar, IconUser } from "@tabler/icons-react";
-import Header from "../components/Header.jsx"; // ✅ adjust path if needed
-import Footer from "../components/Footer.jsx"; // ✅ adjust path if needed
+import { IconSearch, IconCalendar } from "@tabler/icons-react";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import Header from "../components/Header.jsx";
+import Footer from "../components/Footer.jsx";
+import ImageHolder1 from "../assets/ImageHolder1.png";
+import ImageHolder2 from "../assets/ImageHolder2.png";
+import ImageHolder3 from "../assets/ImageHolder3.png";
+import ImageHolder4 from "../assets/ImageHolder4.png";
+import ImageHolder5 from "../assets/ImageHolder5.png";
+import ImageHolder6 from "../assets/ImageHolder6.png";
 
-export default function Showarticles() {
+export default function SearchPage() {
+  const navigate = useNavigate();
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+
+  const allArticles = [
+    {
+      id: 1,
+      category: "LITERARY",
+      date: "October 5, 2025 8:29 PM",
+      title: "The One Who Held The Light",
+      author: "Roanne Kate Esguerra",
+      img: ImageHolder1,
+      description:
+        "As Eve stepped closer to the auditorium, the music of the Grand March started echoing louder in her ears…",
+    },
+    {
+      id: 2,
+      category: "LITERARY",
+      date: "September 22, 2025 6:10 PM",
+      title:
+        "30 LVCC Social Work Graduates Ace 2025 Board Exam with 100% Passing Rate",
+      author: "Hannah J. Gallego, Angelica Mae F. Cenizal",
+      img: ImageHolder2,
+      description:
+        "Thirty Social Work examinees of La Verdad Christian College achieved a perfect passing rate this year…",
+    },
+    {
+      id: 3,
+      category: "LITERARY",
+      date: "September 16, 2025 7:13 PM",
+      title: "LVCC Seminar Empowers Students with God-Centered Study Habit",
+      author: "Prince Daniel Rosas",
+      img: ImageHolder3,
+      description:
+        "La Verdad Christian College’s Guidance and Counseling Office hosted a seminar empowering students…",
+    },
+    {
+      id: 4,
+      category: "NEWS",
+      date: "September 10, 2025 5:52 PM",
+      title: "MDRRMO Apalit Holds Earthquake Drill Seminar at LVCC",
+      author: "Hannah Isabel Gallego",
+      img: ImageHolder4,
+      description:
+        "In preparation for the upcoming Q3 Nationwide Simultaneous Earthquake Drill…",
+    },
+    {
+      id: 5,
+      category: "NEWS",
+      date: "September 8, 2025",
+      title:
+        "UPHOLDING PRICELESS TRUTH: LVCC Students Gear Up for Basic Campus Journalism Training",
+      author: "Prince Daniel Rosas",
+      img: ImageHolder5,
+      description: "LVCC prepares students for upcoming journalism training…",
+    },
+    {
+      id: 6,
+      category: "LITERARY",
+      date: "September 16, 2025 7:13 PM",
+      title: "Voice in Silence",
+      author: "Kierich Taguinin",
+      img: ImageHolder6,
+      description:
+        "National Press Freedom Day reminds us of a truth often forgotten: journalism is not just a profession – it is a commitment to defend…",
+    },
+  ];
+
+  useEffect(() => {
+    if (query.trim() === "") {
+      setResults(allArticles);
+    } else {
+      const filtered = allArticles.filter((item) =>
+        item.title.toLowerCase().includes(query.toLowerCase())
+      );
+      setResults(filtered);
+    }
+  }, [query]);
+
   return (
     <>
-      {/* ✅ HEADER */}
       <Header />
 
-      {/* ✅ ARTICLE CONTENT */}
-      <Container size="md" py="xl">
-        {/* Header Section */}
-        <Box ta="center" mb="lg">
-          <Title order={2} mb="sm" fw={700}>
-            The One Who Held the Light
-          </Title>
-          <Group justify="center" gap="xs">
-            <Group gap={4}>
-              <IconUser size={16} />
-              <Text size="sm" c="dimmed">
-                By La Verdad Herald
-              </Text>
-            </Group>
-            <Divider orientation="vertical" />
-            <Group gap={4}>
-              <IconCalendar size={16} />
-              <Text size="sm" c="dimmed">
-                October 5, 2024
-              </Text>
-            </Group>
-          </Group>
+      <Container size="lg" py="xl">
+        {/* Search Bar (Centered) */}
+        <Box
+          mb="xl"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <TextInput
+            value={query}
+            onChange={(e) => setQuery(e.currentTarget.value)}
+            placeholder="Search"
+            w="60%"
+            size="lg"
+            radius="xl"
+            rightSection={<IconSearch size={20} color="#1e4b63" />}
+            styles={{
+              input: {
+                borderColor: "#1e4b63",
+                borderWidth: "1.5px",
+              },
+            }}
+          />
         </Box>
 
-        {/* Hero Image */}
-        <Card shadow="sm" radius="md" mb="xl" withBorder>
-          <Card.Section>
-            <Image
-              src="https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1400"
-              alt="Teachers Day Celebration"
-              height={400}
-              fit="cover"
-            />
-          </Card.Section>
-        </Card>
+        {/* Title */}
+        <Title order={3} mb="md" align="center" c="#1e4b63">
+          {query.trim() === "" ? "Latest Articles" : "Search Results"}
+        </Title>
 
-        {/* Article Body */}
-        <Box>
-          <Text size="lg" mb="md">
-            Teachers are the guiding light in our journey of learning. They mold
-            our minds, shape our values, and ignite the curiosity that drives us
-            forward. On this Teachers’ Day, we pay tribute to every mentor who
-            has dedicated their time and effort to shaping futures.
+        {/* ✅ If no results found */}
+        {results.length === 0 ? (
+          <Text align="center" c="dimmed" mt="lg" fz="lg">
+            No results found for "{query}"
           </Text>
+        ) : (
+          <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="lg">
+            {results.map((item) => (
+              <Card
+                key={item.id}
+                shadow="sm"
+                radius="md"
+                withBorder
+                onClick={() => navigate(`/article/${item.id}`)}
+                style={{
+                  cursor: "pointer",
+                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "scale(1.02)";
+                  e.currentTarget.style.boxShadow =
+                    "0 6px 20px rgba(0,0,0,0.1)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "scale(1)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              >
+                <Card.Section>
+                  <Image src={item.img} height={180} fit="cover" />
+                </Card.Section>
 
-          <Text size="lg" mb="md">
-            Behind every success story is a teacher who believed in their
-            student when no one else did. Their patience, compassion, and
-            commitment extend far beyond the classroom. They serve not only as
-            educators but as role models, teaching lessons that last a lifetime.
-          </Text>
+                <Badge color="blue" mt="sm">
+                  {item.category}
+                </Badge>
 
-          <Text size="lg" mb="md">
-            As we celebrate this day, let us remember that the true measure of a
-            teacher’s greatness lies not in accolades or recognition, but in the
-            countless lives they’ve touched. To all the teachers who continue to
-            inspire and nurture — you are the ones who held the light.
-          </Text>
+                <Group gap="xs" mt="xs" c="dimmed" fz="xs">
+                  <IconCalendar size={14} />
+                  <Text>{item.date}</Text>
+                </Group>
 
-          <Divider my="xl" />
-
-          <Group justify="space-between" mt="lg">
-            <Anchor href="/literary" size="sm" c="blue.7">
-              ← Back to Literary Section
-            </Anchor>
-            <Text size="sm" c="dimmed">
-              Published by La Verdad Herald
-            </Text>
-          </Group>
-        </Box>
+                <Title order={5} mt="xs">
+                  {item.title}
+                </Title>
+                <Text size="sm" c="dimmed" lineClamp={2}>
+                  {item.description}
+                </Text>
+                <Text size="xs" mt="xs" c="dimmed">
+                  {item.author}
+                </Text>
+              </Card>
+            ))}
+          </SimpleGrid>
+        )}
       </Container>
 
-      {/* ✅ FOOTER */}
       <Footer />
     </>
   );

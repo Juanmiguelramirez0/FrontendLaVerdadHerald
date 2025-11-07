@@ -17,7 +17,10 @@ import Feature from './nav-header/Feature.jsx';
 import Sports from './nav-header/Sports.jsx';
 import About from './nav-header/About.jsx';
 import UserProfile from './pages/UserProfile.jsx';
-// import ArticlePage from './pages/ArticlePage';
+import SearchPage from './pages/SearchPage';
+import SingleArticlePage from "./pages/SingleArticlePage.jsx";
+
+
 
 function AnimatedRoutes() {
   const location = useLocation(); // 🔑 You need location for AnimatePresence
@@ -65,6 +68,7 @@ function AnimatedRoutes() {
           }
         />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/Search" element={<SearchPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/features" element={<Feature />} />
@@ -75,7 +79,7 @@ function AnimatedRoutes() {
         <Route path="/opinions" element={<Opinion />} />
         <Route path="/contactus" element={<Contact />} />
         <Route path="/about" element={<About />} />
-        {/* <Route path="/article/:id" element={<ArticlePage />} /> */}
+         <Route path="/article/:id" element={<SingleArticlePage/>} />
       </Routes>
     </AnimatePresence>
   );
