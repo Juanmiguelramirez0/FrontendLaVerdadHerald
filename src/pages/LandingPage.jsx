@@ -32,6 +32,7 @@ export default function LandingPage() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [opened, setOpened] = useState(false);
    const [mode, setMode] = useState("login");
+   
 
   const articles = [
     {
@@ -108,6 +109,7 @@ export default function LandingPage() {
   const handleLogin = () => {
     setLoggedIn(true);
     setOpened(false);
+    navigate("/dashboard");
   };
 
   const handleSignup = () => {

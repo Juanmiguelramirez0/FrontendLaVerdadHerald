@@ -16,6 +16,7 @@
     "@mantine/notifications": "^8.3.5",
     "@tabler/icons-react": "^3.35.0",
     "@tailwindcss/vite": "^4.1.16",
+    "framer-motion": "^12.23.24",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.4",
