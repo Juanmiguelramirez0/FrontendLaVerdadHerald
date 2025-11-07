@@ -199,7 +199,7 @@ const likedArticles = [
                   </Menu.Item>
                   <Menu.Item
                     color="red"
-                    onClick={() => alert("Logged out")} // replace with your logout function
+                    onClick={() => alert("Logged out")} 
                   >
                     Logout
                   </Menu.Item>
@@ -234,7 +234,7 @@ const likedArticles = [
               </Anchor>
             ))}
 
-            {/* Search icon that transforms into search bar */}
+
             {showSearch ? (
               <TextInput
                 placeholder="Search articles..."
@@ -523,7 +523,7 @@ const likedArticles = [
               </Text>
             </Box>
 
-            {/* Center Links */}
+
             <Box ta="center">
               <Group gap="xl" mb="xs" justify="center">
                 {[
