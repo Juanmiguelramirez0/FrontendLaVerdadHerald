@@ -140,7 +140,7 @@ export default function Header() {
       {/* ================= NAVIGATION ================= */}
       <Box bg="#f8f9fa" p="xs">
         <Container size="xl">
-          <Group justify="center" align="center" gap="xl">
+          <Group justify="center" align="center" gap="4rem">
             {/* Navigation Links */}
             {navLinks.map((link) => (
               <motion.div

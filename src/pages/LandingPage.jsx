@@ -233,9 +233,20 @@ export default function LandingPage() {
             </SimpleGrid>
 
             {!loggedIn && (
-              <Button size="md" mt="md" variant="white" color="dark" radius="md">
-                Sign In to read more
-              </Button>
+            <Button
+              size="md"
+              mt="md"
+              variant="white"
+              color="dark"
+              radius="md"
+              onClick={() => {
+                setMode("login");
+                setOpened(true);
+              }}
+            >
+              Sign In to read more
+            </Button>
+
             )}
           </Container>
         </Box>

@@ -13,7 +13,7 @@
     "@mantine/core": "^8.3.5",
     "@mantine/form": "^8.3.5",
     "@mantine/hooks": "^8.3.5",
-    "@mantine/notifications": "^8.3.5",
+    "@mantine/notifications": "^8.3.7",
     "@tabler/icons-react": "^3.35.0",
     "@tailwindcss/vite": "^4.1.16",
     "framer-motion": "^12.23.24",
