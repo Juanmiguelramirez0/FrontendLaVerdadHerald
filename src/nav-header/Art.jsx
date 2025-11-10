@@ -25,66 +25,44 @@ export default function Art() {
 
   return (
     <>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.6, ease: "easeInOut" }}
+    >
       {/* HEADER */}
       <Header />
 
       {/* TITLE SECTION NEWS */}
-      <Box
-        pos="relative"
-        h="100px"
-        style={{
-          textAlign: "center",
-          overflow: "hidden",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {/* Background image */}
-        <Image
-          src={bglandingpage}
-          alt="News background"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            zIndex: 0,
-          }}
-        />
-        {/* Blue gradient overlay */}
-        <Box
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background:
-              "linear-gradient(180deg, rgba(30,75,99,0.8) 0%, rgba(20,50,70,0.95) 100%)",
-            zIndex: 1,
-          }}
-        />
-        {/* Title text */}
-        <Title
-          order={1}
-          style={{
-            color: "white",
-            fontFamily: "Georgia, serif",
-            fontWeight: 700,
-            letterSpacing: "3px",
-            position: "relative",
-            zIndex: 2,
-            textShadow: "0 2px 6px rgba(0,0,0,0.4)",
-            lineHeight: 1,
-            fontSize: "24px",
-          }}
-        >
-          ART
-        </Title>
-      </Box>
+<Box
+  pos="relative"
+  h="100px"
+  style={{
+    textAlign: "center",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#add8e6", // Light blue
+  }}
+>
+  {/* Title text */}
+  <Title
+    order={1}
+    style={{
+      color: "white",
+      fontFamily: "Georgia, serif",
+      fontWeight: 700,
+      letterSpacing: "3px",
+      lineHeight: 1,
+      fontSize: "24px",
+      textShadow: "0 2px 6px rgba(0,0,0,0.4)",
+    }}
+  >
+    ART
+  </Title>
+</Box>
+
 
       {/* MAIN CONTENT SECTION */}
       <Container size="xl" py="xl">
@@ -185,6 +163,7 @@ export default function Art() {
           </Box>
         </SimpleGrid>
       </Container>
+      </motion.div>
     </>
   );
 }

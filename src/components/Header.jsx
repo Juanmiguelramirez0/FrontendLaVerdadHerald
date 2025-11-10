@@ -138,7 +138,7 @@ export default function Header() {
       </Box>
 
       {/* ================= NAVIGATION ================= */}
-      <Box bg="#f8f9fa" p="xs">
+      <Box bg="#e0e0e0" p="xs">
         <Container size="xl">
           <Group justify="center" align="center" gap="4rem">
             {/* Navigation Links */}
