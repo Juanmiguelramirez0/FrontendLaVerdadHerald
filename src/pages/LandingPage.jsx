@@ -18,12 +18,24 @@ import { useNavigate } from "react-router-dom";
 import Banner1 from "../assets/banner1.png";
 import Footer from "../components/Footer.jsx";
 import { articles } from "../data/Articles";
+import Notification from "../components/Notification.jsx";
+import { useLocation } from "react-router-dom";
+
+
 
 export default function LandingPage() {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
   const [opened, setOpened] = useState(false);
   const [mode, setMode] = useState("login");
+  const [notification, setNotification] = useState(null); 
+  const location = useLocation();
+
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
 
   const handleArticleClick = (articlePath) => {
     if (loggedIn) {
@@ -34,19 +46,42 @@ export default function LandingPage() {
     }
   };
 
-  const handleLogin = () => {
-    setLoggedIn(true);
-    setOpened(false);
-    navigate("/dashboard");
-  };
+const handleLogin = () => {
+  setLoggedIn(true);
+  setOpened(false);
+  setNotification({ message: "You are successfully logged in!", type: "success" });
 
-  const handleSignup = () => {
-    setLoggedIn(true);
-    setOpened(false);
-  };
+  // wait 2 seconds before navigating
+  setTimeout(() => {
+    navigate("/dashboard");
+    setNotification(null); 
+  }, 2000);
+};
+
+const handleSignup = () => {
+  setLoggedIn(true);
+  setOpened(false);
+  setNotification({ message: "You have signed up successfully!", type: "success" });
+
+  setTimeout(() => {
+    navigate("/dashboard");
+    setNotification(null);
+  }, 2000);
+};
+
 
   return (
     <>
+      {/* Notification component */}
+      {notification && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={() => setNotification(null)}
+          duration={10000}
+        />
+      )}
+
       <main style={{ overflow: "visible" }}>
         {/* HERO SECTION */}
         <Box
@@ -111,65 +146,147 @@ export default function LandingPage() {
         </Box>
 
         {/* LOGIN/SIGNUP MODAL */}
-        <Modal
-          opened={opened}
-          onClose={() => setOpened(false)}
-          centered
-          withCloseButton={false}
-          overlayProps={{ backgroundOpacity: 0.6, blur: 3 }}
-          size="sm"
-          radius="md"
-        >
-          <Box
-            style={{
-              backgroundColor: "white",
-              borderRadius: "10px",
-              boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
-              padding: "2rem 2.5rem",
-              textAlign: "center",
+{/* LOGIN/SIGNUP MODAL */}
+<Modal
+  opened={opened}
+  onClose={() => setOpened(false)}
+  centered
+  withCloseButton={false}
+  overlayProps={{ backgroundOpacity: 0.6, blur: 3 }}
+  size="sm"
+  radius="md"
+>
+  <Box
+    style={{
+      backgroundColor: "white",
+      borderRadius: "10px",
+      boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+      padding: "2rem 2.5rem",
+      textAlign: "center",
+      transition: "all 0.3s ease",
+    }}
+  >
+    <Title
+      order={3}
+      mb="lg"
+      style={{ fontFamily: "Georgia, serif", fontWeight: 500, color: "#1e1e1e" }}
+    >
+      {mode === "login" ? "Welcome Back" : "Create an Account"}
+    </Title>
+
+    {/* FORM INPUTS */}
+    {mode === "signup" && (
+      <TextInput
+        placeholder="Username"
+        w="100%"
+        mb="sm"
+        required
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+    )}
+    <TextInput
+      placeholder="Email address"
+      w="100%"
+      mb="sm"
+      required
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+    />
+    <TextInput
+      type="password"
+      placeholder="Password"
+      w="100%"
+      mb="md"
+      required
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+    />
+
+    {/* ERROR MESSAGE */}
+    {error && (
+      <Text c="red" size="sm" mb="sm">
+        {error}
+      </Text>
+    )}
+
+    {/* ACTION BUTTON */}
+    <Button
+      fullWidth
+      color="blue"
+      radius="xl"
+onClick={() => {
+  // Basic field check
+  if (!email || !password || (mode === "signup" && !username)) {
+    setError("Please fill in all fields.");
+    return;
+  }
+
+  // Email format check
+  if (!email.includes("@")) {
+    setError("Please enter a valid email address (must contain '@').");
+    return;
+  }
+
+  setError("");
+
+  if (mode === "login") {
+    handleLogin();
+  } else {
+    handleSignup();
+  }
+}}
+
+      style={{
+        backgroundColor: "#1e4b63",
+        fontWeight: 600,
+        marginBottom: "0.5rem",
+        transition: "background 0.3s ease",
+      }}
+      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#2c6e91")}
+      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#1e4b63")}
+    >
+      {mode === "login" ? "Log In" : "Sign Up"}
+    </Button>
+
+    <Text size="sm" c="dimmed" mb="sm">
+      or
+    </Text>
+
+    <Text size="sm">
+      {mode === "login" ? (
+        <>
+          Don’t have an account?{" "}
+          <Anchor
+            component="button"
+            onClick={() => {
+              setMode("signup");
+              setError("");
             }}
+            style={{ color: "#1e4b63", fontWeight: 500 }}
           >
-            <Title order={3} mb="lg" style={{ fontFamily: "Georgia, serif", fontWeight: 500, color: "#1e1e1e" }}>
-              {mode === "login" ? "Login" : "Sign Up"}
-            </Title>
+            Sign Up
+          </Anchor>
+        </>
+      ) : (
+        <>
+          Already have an account?{" "}
+          <Anchor
+            component="button"
+            onClick={() => {
+              setMode("login");
+              setError("");
+            }}
+            style={{ color: "#1e4b63", fontWeight: 500 }}
+          >
+            Log In
+          </Anchor>
+        </>
+      )}
+    </Text>
+  </Box>
+</Modal>
 
-            {mode === "signup" && <TextInput placeholder="Username" w="100%" mb="sm" required />}
-            <TextInput placeholder="Email address" w="100%" mb="sm" required />
-            <TextInput type="password" placeholder="Password" w="100%" mb="md" required />
-
-            <Button
-              fullWidth
-              color="blue"
-              radius="xl"
-              onClick={mode === "login" ? handleLogin : handleSignup}
-              style={{ backgroundColor: "#1e4b63", fontWeight: 600, marginBottom: "0.5rem" }}
-            >
-              {mode === "login" ? "Log in" : "Sign Up"}
-            </Button>
-
-            <Text size="sm" c="dimmed" mb="sm">
-              or
-            </Text>
-
-            <Text size="sm">
-              {mode === "login" ? (
-                <>
-                  Don’t have an account?{" "}
-                  <Anchor component="button" onClick={() => setMode("signup")} style={{ color: "#1e4b63", fontWeight: 500 }}>
-                    Sign Up
-                  </Anchor>
-                </>
-              ) : (
-                <>
-                  Already have an account?{" "}
-                  <Anchor component="button" onClick={() => setMode("login")} style={{ color: "#1e4b63", fontWeight: 500 }}>
-                    Log In
-                  </Anchor>
-                </>
-              )}
-            </Text>
-          </Box>
-        </Modal>
 
         {/* WELCOME SECTION */}
         <Container size="md" py="xl" ta="center">
@@ -233,20 +350,19 @@ export default function LandingPage() {
             </SimpleGrid>
 
             {!loggedIn && (
-            <Button
-              size="md"
-              mt="md"
-              variant="white"
-              color="dark"
-              radius="md"
-              onClick={() => {
-                setMode("login");
-                setOpened(true);
-              }}
-            >
-              Sign In to read more
-            </Button>
-
+              <Button
+                size="md"
+                mt="md"
+                variant="white"
+                color="dark"
+                radius="md"
+                onClick={() => {
+                  setMode("login");
+                  setOpened(true);
+                }}
+              >
+                Sign In to read more
+              </Button>
             )}
           </Container>
         </Box>

@@ -53,14 +53,14 @@ function AnimatedRoutes() {
         <Route path="/specials" element={<Special />} />
         <Route path="/news" element={<News />} />
         <Route path="/sports" element={<Sports />} />
-        <Route path="/arts" element={<Art />} />
+        <Route path="/art" element={<Art />} />
         <Route path="/literary" element={<Literary />} />
-        <Route path="/opinions" element={<Opinion />} />
-        <Route path="/contactus" element={<Contact />} />
         <Route path="/article" element={<Showarticles />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
-         <Route path="/article/:id" element={<FullArticles/>} />
-         <Route path="/account-deleted" element={<AccountDeleted />} />
+        <Route path="/article/:id" element={<FullArticles/>} />
+        <Route path="/account-deleted" element={<AccountDeleted />} />
+        <Route path="/opinion" element={<Opinion/>} />
       </Routes>
     </AnimatePresence>
   );

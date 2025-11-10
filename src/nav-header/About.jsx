@@ -1,29 +1,6 @@
 import {
-  Box,
-  Container,
-  Title,
-  Text,
-  Image,
-  Group,
-  SimpleGrid,
-  Card,
-  Button,
-  Anchor,
-  TextInput,
-  Menu,
-  Avatar,
-  Center,
-  ActionIcon,
-} from "@mantine/core";
-
-import {
-  IconBrandFacebook,
-  IconMail,
-  IconUserCircle,
-  IconUser,
-  IconSearch,
-  IconX,
-} from "@tabler/icons-react";
+  Box, Container, Title, Text, Image, Group, SimpleGrid, Card, Button, Anchor, TextInput, Menu, Avatar, Center, ActionIcon,} from "@mantine/core";
+import {IconBrandFacebook, IconMail, IconUserCircle, IconUser, IconSearch, IconX,} from "@tabler/icons-react";
 
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -49,11 +26,11 @@ export default function AboutPage() {
   ];
 
   const team = [
-    { name: "Amber Princess Rosana", role: "UI/UX Designer" },
     { name: "Jeremy Ortega", role: "Project Manager" },
-    { name: "Estela Mae Jalac", role: "Quality Assurance" },
     { name: "Lei Ann Judea", role: "Business Analyst" },
+    { name: "Estela Mae Jalac", role: "Quality Assurance" },
     { name: "Rolando Majait", role: "Developer" },
+      { name: "Amber Princess Rosana", role: "UI/UX Designer" },
     { name: "Juan Miguel Ramirez", role: "UI/UX Designer" },
   ];
 

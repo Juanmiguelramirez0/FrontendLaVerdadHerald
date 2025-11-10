@@ -184,7 +184,7 @@ export const Specials = [
   },
     {
     id: 2,
-    category: "Specials",
+    category: "Specials",     
     date: "August 30, 2025 at 7:28 PM",
     title: "Coro de La Verdad Leads the Doxology and the National Anthem at the Environmental Summit 2025",
     author: "Veronica Sarmiento",
@@ -220,7 +220,7 @@ export const Opinions = [
 
 export const News = [
   {
-    id: 2,
+    id: 1,
     category: "News",
     date: "September 22, 2025 at 6:10 PM",
     title: "30 LVCC SOCIAL WORK GRADUATES ACE 2025 BOARD EXAM WITH 100% PASSING RATE",
@@ -230,7 +230,7 @@ export const News = [
       "Thirty Social Work examinees from La Verda...",
   },
   {
-    id: 3,
+    id: 2,
     category: "News",
     date: "September 10, 2025 at 5:52 PM",
     title: "MDRRMO APALIT HOLDS EARTHQUAKE DRILL SEMINAR AT LVCC",
@@ -240,7 +240,7 @@ export const News = [
       "In preparation for the upcoming Q3 Nationw...",
   },
   {
-    id: 4,
+    id: 3,
     category: "News",
     date: "September 8, 2025 at 3:47 PM",
     title: "UPHOLDING PRICELESS TRUTH: LVCC STUDENTS GEAR UP FOR BASIC CAMPUS JOURNALISM TRAINING",

@@ -16,13 +16,13 @@ export default function AccountDeleted() {
   const [user, setUser] = useState(() => JSON.parse(localStorage.getItem("user")) || null);
 
   const [opened, setOpened] = useState(false);
-  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false); // For delete confirmation
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  const [notification, setNotification] = useState(null); // { message: "", type: "success"|"error"|"info" }
+  const [notification, setNotification] = useState(null);
 
   const showNotification = (message, type = "info") => {
     setNotification({ message, type });
@@ -32,7 +32,7 @@ export default function AccountDeleted() {
     localStorage.removeItem("user");
     sessionStorage.clear();
     showNotification("You have been successfully logged out", "info");
-    setTimeout(() => navigate("/"), 1000); // wait 1s so user can see notification
+    setTimeout(() => navigate("/"), 10000); // wait 1s so user can see notification
   };
 
   const handleConfirmDelete = () => {

@@ -1,7 +1,9 @@
 import ImageHolder1 from "../assets/ImageHolder1.png";
 import ImageHolder2 from "../assets/ImageHolder2.png";
 import ImageHolder3 from "../assets/ImageHolder3.png";
-import ImageHolder4 from "../assets/ImageHolder4.png";
+import News1 from "../assets/News1.png";
+import News2 from "../assets/News2.png";
+import News3 from "../assets/News3.png";
 
 export const sharedArticles = [
   {
@@ -31,4 +33,34 @@ export const sharedArticles = [
     img: ImageHolder3,
     description: "La Verdad Christian College’s Guidance and Counseling Office hosted a seminar empowering students…",
   },
+  {
+      id: 4,
+      category: "News",
+      date: "September 22, 2025 at 6:10 PM",
+      title: "30 LVCC SOCIAL WORK GRADUATES ACE 2025 BOARD EXAM WITH 100% PASSING RATE",
+      author: "Hannah J. Gallego and Angelica Mae F. Cenizal",
+      img: News1,
+      description:
+        "Thirty Social Work examinees from La Verda...",
+    },
+    {
+      id: 5,
+      category: "News",
+      date: "September 10, 2025 at 5:52 PM",
+      title: "MDRRMO APALIT HOLDS EARTHQUAKE DRILL SEMINAR AT LVCC",
+      author: "Hannah J. Gallego",
+      img: News2,
+      description:
+        "In preparation for the upcoming Q3 Nationw...",
+    },
+    {
+      id: 6,
+      category: "News",
+      date: "September 8, 2025 at 3:47 PM",
+      title: "UPHOLDING PRICELESS TRUTH: LVCC STUDENTS GEAR UP FOR BASIC CAMPUS JOURNALISM TRAINING",
+      author: "Prince Daniel Rosas",
+      img: News3,
+      description:
+        "La Verdad Christian College (LVCC) held a Ba...",
+    },
 ];
