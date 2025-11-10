@@ -53,7 +53,7 @@ export default function Statistics() {
     { action: "Edited", title: "Sports Results", user: "admin1@laverdad.edu.ph", timestamp: "10/18/2025 6:30 PM" },
   ];
 
-  
+
   const sidebarLinks = [
     { label: "Statistics", icon: <IconListDetails size={16} />, to: "/admin/dashboard" },
     { label: "Create Article", icon: <IconEdit size={16} />, to: "/admin/create-article" },
@@ -88,7 +88,7 @@ export default function Statistics() {
             textShadow: "0 2px 6px rgba(0,0,0,0.4)",
           }}
         >
-          ART
+          Admin | Statistics
         </Title>
       </Box>
 
