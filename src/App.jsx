@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
 import "@mantine/core/styles.css";
 import { AnimatePresence, motion } from "framer-motion";
-
 import LandingPage from "./pages/LandingPage";
 import Login from './components/Login.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
@@ -10,7 +9,7 @@ import Dashboard from './Pages/Dashboard';
 import Opinion from './nav-header/Opinion.jsx';
 import Literary from './nav-header/Literary.jsx';
 import News from './nav-header/News.jsx';
-import Contact from './nav-header/Contact.jsx';
+import ContactUs from './nav-header/ContactUs.jsx';
 import Special from './nav-header/Specials.jsx';
 import Art from './nav-header/Art.jsx';
 import Feature from './nav-header/Feature.jsx';
@@ -56,7 +55,7 @@ function AnimatedRoutes() {
         <Route path="/art" element={<Art />} />
         <Route path="/literary" element={<Literary />} />
         <Route path="/article" element={<Showarticles />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/about" element={<About />} />
         <Route path="/article/:id" element={<FullArticles/>} />
         <Route path="/account-deleted" element={<AccountDeleted />} />
