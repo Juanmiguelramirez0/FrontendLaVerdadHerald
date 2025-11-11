@@ -1,4 +1,3 @@
-// src/components/AdminSidebar.jsx
 import React from "react";
 import { Box, Stack, Text } from "@mantine/core";
 import { Link, useLocation } from "react-router-dom";
@@ -11,7 +10,7 @@ export default function AdminSidebar({ links }) {
       w={240}
       p="md"
       style={{
-        backgroundColor: "#0a3d62",
+        backgroundColor: "#265F7C",
         color: "white",
         display: "flex",
         flexDirection: "column",
@@ -21,38 +20,60 @@ export default function AdminSidebar({ links }) {
         height: "100vh",
       }}
     >
-      <Text fw={600} tt="uppercase" mb="md">
-        Admin Panel
-      </Text>
 
       <Stack gap="sm">
         {links.map((link, index) => {
           const isActive = location.pathname === link.to;
 
+          // If active, render as <div> and disable click completely
+          if (isActive) {
+            return (
+              <Box
+                key={index}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6,
+                  padding: "4px 8px",
+                  borderRadius: 4,
+                  backgroundColor: "#1e5aa8",
+                  color: "white",
+                  cursor: "not-allowed", // visually show it's disabled
+                  pointerEvents: "none", // disable all click events
+                }}
+              >
+                {link.icon} {link.label}
+              </Box>
+            );
+          }
+
+          // If not active, render as normal Link
           return (
-            <Text
+            <Box
               key={index}
               component={Link}
               to={link.to}
               style={{
-                cursor: "pointer",
                 display: "flex",
                 alignItems: "center",
                 gap: 6,
                 padding: "4px 8px",
                 borderRadius: 4,
-                backgroundColor: isActive ? "#1e5aa8" : "transparent",
+                backgroundColor: "transparent",
+                color: "white",
+                cursor: "pointer",
+                textDecoration: "none",
                 transition: "background-color 0.2s",
               }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.backgroundColor = isActive ? "#1e5aa8" : "#144173")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.backgroundColor = isActive ? "#1e5aa8" : "transparent")
-              }
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "#144173";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "transparent";
+              }}
             >
               {link.icon} {link.label}
-            </Text>
+            </Box>
           );
         })}
       </Stack>

@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import {
   Group,
   Text,
@@ -21,6 +21,7 @@ import LikesIcon from "../assets/admin-images/LikesIcon.png";
 
 import Header from "../components/Header.jsx";
 import AdminSidebar from "../components/AdminSidebar.jsx";
+import AdminHeader from "../components/AdminHeader.jsx";
 
 export default function Statistics() {
   const stats = [
@@ -64,7 +65,15 @@ export default function Statistics() {
 
   return (
     <>
-      <Header />
+
+      <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+              style={{ width: "100%" }}
+            >
+      <AdminHeader />
 
       <Box
         pos="relative"
@@ -114,13 +123,7 @@ export default function Statistics() {
               alignItems: "center",
             }}
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-              style={{ width: "100%" }}
-            >
+
               <Box
                 bg="white"
                 p="xl"
@@ -181,8 +184,8 @@ export default function Statistics() {
                           key={header}
                           style={{
                             textAlign: "center",
-                            backgroundColor: "#114863",
-                            color: "white",
+                            backgroundColor: "#A1BAC7",
+                            color: "black",
                             border: "1px solid #8ab0d3",
                           }}
                         >
@@ -212,10 +215,11 @@ export default function Statistics() {
                   </Table.Tbody>
                 </Table>
               </Box>
-            </motion.div>
+            
           </Container>
         </Box>
       </div>
+    </motion.div>
     </>
   );
 }

@@ -30,6 +30,7 @@ import ManageModerators from "./admin/ManageModerators.jsx";
 import DraftArticles from "./admin/DraftArticles.jsx";
 import AuditTrail from "./admin/AuditTrail.jsx";
 import Statistics from "./admin/Statistics.jsx";
+import AdminDashboard from "./admin/AdminDashboard.jsx"; // 
 
 // ===== COORDINATOR PAGES =====
 import CoordinatorDashboard from "./coordinator/CoordinatorDashboard.jsx";
@@ -75,7 +76,7 @@ function AnimatedRoutes() {
         <Route path="/opinion" element={<Opinion />} />
 
         {/* ================= ADMIN ROUTES ================= */}
-        {/* <Route path="/admin/dashboard" element={<AdminDashboard />} /> */}
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/create-article" element={<CreateArticle />} />
         <Route path="/admin/draft-articles" element={<DraftArticles />} />
         <Route path="/admin/moderators" element={<ManageModerators />} />
@@ -91,6 +92,10 @@ function AnimatedRoutes() {
         {/* ================= COORDINATOR ROUTES ================= */}
         <Route path="/coordinator/dashboard" element={<CoordinatorDashboard />} />
         <Route path="/coordinator/manage-writers" element={<ManageWriters />} />
+
+        {/* ================= SIDENAV ROUTES ================= */}
+
+                <Route path="*" element={<AdminDashboard />} />
       </Routes>
     </AnimatePresence>
   );
