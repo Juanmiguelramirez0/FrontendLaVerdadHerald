@@ -13,9 +13,8 @@ import {
   IconUserCircle,
   IconLogout,
   IconSearch,
-  IconX,
 } from "@tabler/icons-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Lvlogowhitebg from "../assets/Lvlogowhitebg.png";
@@ -31,7 +30,6 @@ export default function Header() {
     if (confirmLogout) {
       localStorage.removeItem("user");
       sessionStorage.clear();
-
       navigate("/");
     }
   };
@@ -51,7 +49,17 @@ export default function Header() {
   return (
     <>
       {/* ================= HEADER ================= */}
-      <Box pos="relative" bg="#1e4b63" c="white" py="md">
+      <Box
+        pos="relative"
+        bg="#1e4b63"
+        c="white"
+        py="md"
+        onClick={() => navigate("/dashboard")} // ✅ Click anywhere on header to go dashboard
+        style={{
+          cursor: "pointer",
+          userSelect: "none",
+        }}
+      >
         <Image
           src={header3}
           alt="Header Background"
@@ -67,6 +75,7 @@ export default function Header() {
             zIndex: 0,
           }}
         />
+
         <Container size="xl" style={{ position: "relative", zIndex: 1 }}>
           <Box
             style={{
@@ -93,45 +102,45 @@ export default function Header() {
             </Group>
 
             {/* Profile Menu on Right */}
-            <Group style={{ marginLeft: "auto" }}>
-            <Menu shadow="md" width={180} position="bottom-end">
-              <Menu.Target>
-                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 1 }}>
-                  <ActionIcon
-                    variant="light"
-                    color="gray"
-                    radius="xl"
-                    size="lg" 
-                    style={{
-                      backgroundColor: "#f1f3f5",
-                      cursor: "pointer",
-                    }}
+            <Group style={{ marginLeft: "auto", zIndex: 10 }}>
+              <Menu shadow="md" width={180} position="bottom-end">
+                <Menu.Target>
+                  <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 1 }}>
+                    <ActionIcon
+                      variant="light"
+                      color="gray"
+                      radius="xl"
+                      size="lg"
+                      style={{
+                        backgroundColor: "#f1f3f5",
+                        cursor: "pointer",
+                      }}
+                      onClick={(e) => e.stopPropagation()} // ✅ Prevent header click trigger
+                    >
+                      <IconUserCircle size={50} color="#1e4b63" />
+                    </ActionIcon>
+                  </motion.div>
+                </Menu.Target>
+
+                <Menu.Dropdown onClick={(e) => e.stopPropagation()}>
+                  <Menu.Label>Account</Menu.Label>
+
+                  <Menu.Item
+                    onClick={() => navigate("/userprofile")}
+                    leftSection={<IconUserCircle size={18} />}
                   >
-                    <IconUserCircle size={50} color="#1e4b63" />
-                  </ActionIcon>
-                </motion.div>
-              </Menu.Target>
+                    Profile
+                  </Menu.Item>
 
-              <Menu.Dropdown>
-                <Menu.Label>Account</Menu.Label>
-
-                <Menu.Item
-                  onClick={() => navigate("/userprofile")}
-                  leftSection={<IconUserCircle size={18} />}
-                >
-                  Profile
-                </Menu.Item>
-
-                <Menu.Item
-                  color="red"
-                  leftSection={<IconLogout size={18} />}
-                  onClick={handleLogout}
-                >
-                  Log Out
-                </Menu.Item>
-              </Menu.Dropdown>
-            </Menu>
-
+                  <Menu.Item
+                    color="red"
+                    leftSection={<IconLogout size={18} />}
+                    onClick={handleLogout}
+                  >
+                    Log Out
+                  </Menu.Item>
+                </Menu.Dropdown>
+              </Menu>
             </Group>
           </Box>
         </Container>
@@ -141,7 +150,6 @@ export default function Header() {
       <Box bg="#e0e0e0" p="xs">
         <Container size="xl">
           <Group justify="center" align="center" gap="4rem">
-            {/* Navigation Links */}
             {navLinks.map((link) => (
               <motion.div
                 key={link}
@@ -171,10 +179,7 @@ export default function Header() {
               </motion.div>
             ))}
 
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
               <ActionIcon
                 variant="subtle"
                 color="#2c6072"
@@ -189,7 +194,6 @@ export default function Header() {
                 <IconSearch size={20} />
               </ActionIcon>
             </motion.div>
-
           </Group>
         </Container>
       </Box>

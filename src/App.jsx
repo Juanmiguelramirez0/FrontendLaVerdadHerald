@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import { AnimatePresence, motion } from "framer-motion";
+import { Notifications } from "@mantine/notifications";
 
 // ===== USER PAGES =====
 import LandingPage from "./pages/LandingPage";
@@ -82,12 +83,7 @@ function AnimatedRoutes() {
         <Route path="/admin/moderators" element={<ManageModerators />} />
         <Route path="/admin/audit-trail" element={<AuditTrail />} />
         <Route path="/admin/statistics" element={< Statistics />} />
-
-        <Route path="/statistics" element={<Statistics />} />
-        <Route path="/create-article" element={<CreateArticle />} />
-        <Route path="/draft-articles" element={<DraftArticles />} />
-        <Route path="/manage-moderators" element={<ManageModerators />} />
-        <Route path="/audit-trail" element={<AuditTrail />} />
+        
 
         {/* ================= COORDINATOR ROUTES ================= */}
         <Route path="/coordinator/dashboard" element={<CoordinatorDashboard />} />
@@ -105,6 +101,7 @@ function AnimatedRoutes() {
 function App() {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
+      <Notifications position="top-right" />
       <BrowserRouter>
         <AnimatedRoutes />
       </BrowserRouter>

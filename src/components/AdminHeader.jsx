@@ -15,7 +15,7 @@ import Lvlogowhitebg from "../assets/Lvlogowhitebg.png";
 import Lvherald from "../assets/Lvherald.png";
 import header3 from "../assets/header3.png";
 import UserSettingsIcon from "../assets/admin-images/UserSettingsIcon.png";
-import ProfileIcon from "../assets/admin-images/ProfileIcon.png"; // ✅ custom profile icon
+import ProfileIcon from "../assets/admin-images/ProfileIcon.png";
 
 export default function AdminHeader() {
   const navigate = useNavigate();
@@ -44,7 +44,14 @@ export default function AdminHeader() {
   return (
     <>
       {/* ================= HEADER ================= */}
-      <Box pos="relative" bg="#1e4b63" c="white" py="md">
+      <Box
+        pos="relative"
+        bg="#1e4b63"
+        c="white"
+        py="md"
+        onClick={() => navigate("/admin/dashboard")} // ✅ click anywhere on header
+        style={{ cursor: "pointer", userSelect: "none" }}
+      >
         {/* Background overlay */}
         <Image
           src={header3}
@@ -95,7 +102,10 @@ export default function AdminHeader() {
                   variant="transparent"
                   radius="xl"
                   size="lg"
-                  onClick={() => navigate("/admin/settings")}
+                  onClick={(e) => {
+                    e.stopPropagation(); // ✅ Prevent triggering header click
+                    navigate("/admin/settings");
+                  }}
                   style={{ cursor: "pointer", padding: 4 }}
                 >
                   <img
@@ -115,13 +125,14 @@ export default function AdminHeader() {
                 <Menu.Target>
                   <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 1 }}>
                     <ActionIcon
-                      variant="transparent" // ✅ No background
+                      variant="transparent"
                       radius="xl"
                       size="lg"
                       style={{ cursor: "pointer" }}
+                      onClick={(e) => e.stopPropagation()} // ✅ Prevent routing when opening menu
                     >
                       <img
-                        src={ProfileIcon} // ✅ Use custom profile icon
+                        src={ProfileIcon}
                         alt="Profile"
                         style={{
                           width: "36px",
@@ -133,7 +144,7 @@ export default function AdminHeader() {
                   </motion.div>
                 </Menu.Target>
 
-                <Menu.Dropdown>
+                <Menu.Dropdown onClick={(e) => e.stopPropagation()}>
                   <Menu.Label>Account</Menu.Label>
                   <Menu.Item
                     onClick={() => navigate("/userprofile")}
@@ -141,7 +152,11 @@ export default function AdminHeader() {
                       <img
                         src={ProfileIcon}
                         alt="Profile"
-                        style={{ width: "18px", height: "18px", objectFit: "contain" }}
+                        style={{
+                          width: "18px",
+                          height: "18px",
+                          objectFit: "contain",
+                        }}
                       />
                     }
                   >
@@ -178,9 +193,16 @@ export default function AdminHeader() {
                   fw={700}
                   fz="sm"
                   underline="never"
-                  style={{ textTransform: "uppercase", transition: "color 0.2s ease" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "yellow")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "#2c6072")}
+                  style={{
+                    textTransform: "uppercase",
+                    transition: "color 0.2s ease",
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.color = "yellow")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = "#2c6072")
+                  }
                 >
                   {link}
                 </Anchor>
@@ -194,8 +216,14 @@ export default function AdminHeader() {
                 color="#2c6072"
                 radius="xl"
                 size="lg"
-                onClick={() => navigate("/search")}
-                style={{ marginLeft: "8px", transition: "transform 0.2s ease" }}
+                onClick={(e) => {
+                  e.stopPropagation(); // ✅ Prevent header click
+                  navigate("/search");
+                }}
+                style={{
+                  marginLeft: "8px",
+                  transition: "transform 0.2s ease",
+                }}
               >
                 <IconSearch size={20} />
               </ActionIcon>

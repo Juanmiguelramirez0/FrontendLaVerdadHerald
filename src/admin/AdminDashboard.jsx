@@ -41,7 +41,7 @@ export default function AdminDashboard() {
             size="xs"
             rightSection={<IconExternalLink size={14} />}
             mt="sm"
-            onClick={() => navigate("/statistics")} // Navigate to Statistics
+            onClick={() => navigate("/admin/statistics")} // Navigate to Statistics
           >
             OPEN ADMIN DASHBOARD
           </Button>

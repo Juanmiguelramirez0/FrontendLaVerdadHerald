@@ -1,9 +1,23 @@
 import React from "react";
-import { Box, Stack, Text } from "@mantine/core";
+import { Box, Stack } from "@mantine/core";
 import { Link, useLocation } from "react-router-dom";
+import {
+  IconListDetails,
+  IconEdit,
+  IconFileText,
+  IconUsersGroup,
+} from "@tabler/icons-react";
 
-export default function AdminSidebar({ links }) {
+export default function AdminSidebar() {
   const location = useLocation();
+
+  const links = [
+    { label: "Statistics", icon: <IconListDetails size={16} />, to: "/admin/statistics" },
+    { label: "Create Article", icon: <IconEdit size={16} />, to: "/admin/create-article" },
+    { label: "Draft Articles", icon: <IconFileText size={16} />, to: "/admin/draft-articles" },
+    { label: "Manage Moderators", icon: <IconUsersGroup size={16} />, to: "/admin/moderators" },
+    { label: "Audit Trail", icon: <IconListDetails size={16} />, to: "/admin/audit-trail" },
+  ];
 
   return (
     <Box
@@ -20,34 +34,10 @@ export default function AdminSidebar({ links }) {
         height: "100vh",
       }}
     >
-
       <Stack gap="sm">
         {links.map((link, index) => {
           const isActive = location.pathname === link.to;
 
-          // If active, render as <div> and disable click completely
-          if (isActive) {
-            return (
-              <Box
-                key={index}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 6,
-                  padding: "4px 8px",
-                  borderRadius: 4,
-                  backgroundColor: "#1e5aa8",
-                  color: "white",
-                  cursor: "not-allowed", // visually show it's disabled
-                  pointerEvents: "none", // disable all click events
-                }}
-              >
-                {link.icon} {link.label}
-              </Box>
-            );
-          }
-
-          // If not active, render as normal Link
           return (
             <Box
               key={index}
@@ -57,19 +47,19 @@ export default function AdminSidebar({ links }) {
                 display: "flex",
                 alignItems: "center",
                 gap: 6,
-                padding: "4px 8px",
+                padding: "6px 10px",
                 borderRadius: 4,
-                backgroundColor: "transparent",
+                backgroundColor: isActive ? "#1e5aa8" : "transparent",
                 color: "white",
                 cursor: "pointer",
                 textDecoration: "none",
                 transition: "background-color 0.2s",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#144173";
+                if (!isActive) e.currentTarget.style.backgroundColor = "#144173";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "transparent";
+                if (!isActive) e.currentTarget.style.backgroundColor = "transparent";
               }}
             >
               {link.icon} {link.label}
