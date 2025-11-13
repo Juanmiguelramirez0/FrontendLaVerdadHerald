@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Box,
   Container,
@@ -27,6 +27,8 @@ export default function CreateArticle() {
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
 
+  const inputRef = useRef(null); // ✅ Ref for hidden file input
+
   const sidebarLinks = [
     { label: "Dashboard", path: "/admin" },
     { label: "Create Article", path: "/admin/create-article" },
@@ -38,9 +40,13 @@ export default function CreateArticle() {
   // 📸 Handle Image Upload + Preview
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      setImage(URL.createObjectURL(file));
-    }
+    if (file) setImage(URL.createObjectURL(file));
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    if (file) setImage(URL.createObjectURL(file));
   };
 
   // 📰 Handle Publish
@@ -60,7 +66,7 @@ export default function CreateArticle() {
       author,
       category,
       description: content.slice(0, 100) + "...",
-      image: image || "https://via.placeholder.com/600x400",
+      img: image || "Literary1.png",
       date: new Date().toLocaleString(),
       tags,
       content,
@@ -72,7 +78,6 @@ export default function CreateArticle() {
     const updatedArticles = [newArticle, ...existingArticles];
     localStorage.setItem("articles", JSON.stringify(updatedArticles));
 
-    // ✅ Show success toast
     notifications.show({
       title: "Article Published Successfully!",
       message: `"${title}" has been added.`,
@@ -80,7 +85,6 @@ export default function CreateArticle() {
       autoClose: 3000,
     });
 
-    // ✅ Redirect to article page (admin view)
     setTimeout(() => {
       navigate(`/admin/article/${newArticle.id}`, {
         state: { published: true },
@@ -162,49 +166,58 @@ export default function CreateArticle() {
                 required
               />
 
-              <Box
-                component="label"
-                htmlFor="cover-image"
-                style={{
-                  border: "2px dashed #ccc",
-                  borderRadius: "8px",
-                  backgroundColor: "#f8f9fa",
-                  textAlign: "center",
-                  padding: "20px",
-                  cursor: "pointer",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  minHeight: "150px",
-                }}
-              >
-                {image ? (
-                  <img
-                    src={image}
-                    alt="Cover Preview"
-                    style={{
-                      maxWidth: "100%",
-                      maxHeight: "250px",
-                      borderRadius: "8px",
-                      objectFit: "cover",
-                    }}
+              <Box>
+                <Text fw={500} mb="xs">
+                  Cover Image
+                </Text>
+
+                {/* ✅ Fully functional image upload */}
+                <Box
+                  onClick={() => inputRef.current && inputRef.current.click()}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={handleDrop}
+                  style={{
+                    border: "2px dashed #ccc",
+                    borderRadius: "8px",
+                    backgroundColor: "#f8f9fa",
+                    textAlign: "center",
+                    padding: "20px",
+                    cursor: "pointer",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    minHeight: "150px",
+                  }}
+                >
+                  {image ? (
+                    <img
+                      src={image}
+                      alt="Cover Preview"
+                      style={{
+                        maxWidth: "100%",
+                        maxHeight: "250px",
+                        borderRadius: "8px",
+                        objectFit: "cover",
+                      }}
+                    />
+                  ) : (
+                    <>
+                      <IconUpload size={30} color="#777" />
+                      <Text size="sm" mt="xs" c="dimmed">
+                        Click or drag image to upload
+                      </Text>
+                    </>
+                  )}
+
+                  <input
+                    ref={inputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    style={{ display: "none" }}
                   />
-                ) : (
-                  <>
-                    <IconUpload size={30} color="#777" />
-                    <Text size="sm" mt="xs" c="dimmed">
-                      Click or drag image to upload
-                    </Text>
-                  </>
-                )}
-                <input
-                  id="cover-image"
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  style={{ display: "none" }}
-                />
+                </Box>
               </Box>
 
               <Group grow>

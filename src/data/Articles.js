@@ -9,6 +9,8 @@ import Literary1 from "../assets/Literary1.png";
 import Literary2 from "../assets/Literary2.png";
 import Literary3 from "../assets/Literary3.png";
 import Literary4 from "../assets/Literary4.png";
+import Literary5 from "../assets/Literary5.png";
+import Literary6 from "../assets/Literary6.png";
 import Specials1 from "../assets/Specials1.png";
 import Specials2 from "../assets/Specials2.png";
 import Specials3 from "../assets/Specials3.png";
@@ -17,6 +19,8 @@ import News1 from "../assets/News1.png";
 import News2 from "../assets/News2.png";
 import News3 from "../assets/News3.png";
 import Arts1 from "../assets/Arts1.png";
+
+
 
 
 // Main list of articles
@@ -171,6 +175,43 @@ export const otherArticles = [
 ];
 
 
+
+export const CurrentArticle = [
+  {
+    id: 1,
+    category: "LITERARY",
+    date: "October 17 2025 at 2:58 PM",
+    title: "The Ones Who Light Our Path",
+    author: "Kierich Taguinin",
+    img: Literary1,
+    description: `The room was silent except for the sound of our heavy sighs when our professor broke the silence…
+“You need to make a project so your grades can be pulled up,” our professor said calmly. Her words broke the silence, though we still stared blankly at our desks.
+After hearing those words, we all turned our heads when our professor chuckled slightly, which made us look at her.
+
+“Don’t worry, it’s only midterms. You can still make up for it in the finals,” she said.
+“I told you before, didn’t I? In this course, you won’t last long if you have a weak EQ. Don’t let your emotions lead the way, because once you do, everything else will be affected.”
+A quiet sigh of relief swept through the room.
+
+“Don’t think that failing means you’re weak. Always remember, wherever you’re weak, that’s where you should focus on improving. And failing doesn’t mean you can’t recover—instead, think of your mistakes as your guide toward perfection. Those mistakes will lead you to learn so that next time, you’ll know what to do.”
+
+I smiled as I remembered those days—the days when we wanted to give up, the days when we lost hope of ever passing, and the days when we doubted if we should continue studying or just quit.
+“Congratulations.” I turned around and saw our professor.
+
+“Thank you, Ma’am,” I replied.
+
+As I slowly walked toward the stage, I carried with me a feeling of nervousness—not the kind I used to feel during recitations, but a mix of excitement and joy.
+
+It felt like it was only yesterday when I cried because I failed the exam, when my quizzes were all failing marks, and when the projects I submitted weren’t that good.
+
+It felt like it was only yesterday when we almost gave up and lost all hope—but because of our teachers, who became our source of encouragement through their cheerful words and who never got tired of reminding and cheering us up—we continued.
+
+Our 𝐓𝐄𝐀𝐂𝐇𝐄𝐑𝐒 became the “light” that guided us in times when all we could see was darkness.
+We will never get tired of being grateful for all the lessons and advice you shared with us. We will carry them with us until we finish our studies and step into the real world.`,
+  },
+];
+
+
+
 export const Specials = [
   {
     id: 1,
@@ -291,6 +332,36 @@ export const Literary = [
     img: Literary4,
     description:
       "As Eve stepped closer to the auditorium, the music of the Grand March started echoing louder in her ears. She was greeted by the...",
+  },
+  {
+    id: 5,
+    category: "LITERARY",
+    date: "May 9, 2025 at 8:58 PM",
+    title: "Isang Biyaya Mula sa Maylikha!",
+    author: "Princess Shane Robles",
+    img: Literary5,
+    description:
+      "Kailanma’y hindi sapat ang anomang tula’t mga salita upang maparamdam ang wagas na pagmamahal ng isang magulang.  Minsa...",
+  },
+  {
+    id: 6,
+    category: "LITERARY",
+    date: "May 1, 2025 at 10:38 PM",
+    title: "Tinig ng Pagsusumikap at Sakripisyo",
+    author: "Princess Shane Robles",
+    img: Literary6,
+    description:
+      "Ngayon, ating ipinagdiriwang ang araw ng pagkilala sa mga manggagawang Pilipino Na walang sawang nagpapakapagod, nagsasak...",
+  },
+  {
+    id: 7,
+    category: "LITERARY",
+    date: "May 1, 2025 at 10:38 PM",
+    title: "Tinig ng Pagsusumikap at Sakripisyo",
+    author: "Princess Shane Robles",
+    img: Literary6,
+    description:
+      "Ngayon, ating ipinagdiriwang ang araw ng pagkilala sa mga manggagawang Pilipino Na walang sawang nagpapakapagod, nagsasak...",
   },
 ]
 

@@ -31,7 +31,10 @@ import ManageModerators from "./admin/ManageModerators.jsx";
 import DraftArticles from "./admin/DraftArticles.jsx";
 import AuditTrail from "./admin/AuditTrail.jsx";
 import Statistics from "./admin/Statistics.jsx";
-import AdminDashboard from "./admin/AdminDashboard.jsx"; // 
+import AdminDashboard from "./admin/AdminDashboard.jsx";
+import EditArticle from "./admin/EditArticle.jsx";
+import Articles from "./admin/Articles.jsx";
+
 
 // ===== COORDINATOR PAGES =====
 import CoordinatorDashboard from "./coordinator/CoordinatorDashboard.jsx";
@@ -83,6 +86,8 @@ function AnimatedRoutes() {
         <Route path="/admin/moderators" element={<ManageModerators />} />
         <Route path="/admin/audit-trail" element={<AuditTrail />} />
         <Route path="/admin/statistics" element={< Statistics />} />
+        <Route path="/admin/editarticle" element={< EditArticle/>} />
+        <Route path="/admin/article" element={< Articles/>} />
         
 
         {/* ================= COORDINATOR ROUTES ================= */}
