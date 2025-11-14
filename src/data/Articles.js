@@ -138,78 +138,150 @@ export const articles = [
       },
 ];
 
-// Single main article
-export const mainArticle = {
-  id: 1,
-  title: "World Teachers’ Day 2025: Honoring the Light of Learning",
-  author: "John Michael Santos",
-  date: "October 5, 2025",
-  img: ImageHolder1,
-  category: "NEWS",
-  description:
-    "La Verdad Christian College celebrates World Teachers’ Day 2025, recognizing the unwavering dedication and passion of educators who continue to shape the future with knowledge and compassion.",
-};
-
-// Other articles for Dashboard or additional sections
-export const otherArticles = [
-  {
+  // Single main article
+  export const mainArticle = {
     id: 1,
-    title: "LVCC Launches New Community Literacy Program",
-    author: "Anna Grace Dela Cruz",
-    date: "October 1, 2025",
-    img: ImageHolder2,
-    category: "FEATURES",
+    title: "World Teachers’ Day 2025: Honoring the Light of Learning",
+    author: "John Michael Santos",
+    date: "October 5, 2025",
+    img: ImageHolder1,
+    category: "NEWS",
     description:
-      "The new literacy initiative aims to reach underserved communities and promote education for all.",
-  },
-  {
-    id: 2,
-    title: "Campus Journalism Summit 2025 Highlights Student Voices",
-    author: "Reanne Kate Esguerra",
-    date: "September 25, 2025",
-    img: ImageHolder3,
-    category: "SPECIALS",
-    description:
-      "Student journalists from across the country gathered to discuss the power of storytelling in shaping truth.",
-  },
-];
+      "La Verdad Christian College celebrates World Teachers’ Day 2025, recognizing the unwavering dedication and passion of educators who continue to shape the future with knowledge and compassion.",
+  };
+
+  // Other articles for Dashboard or additional sections
+  export const otherArticles = [
+    {
+      id: 1,
+      title: "LVCC Launches New Community Literacy Program",
+      author: "Anna Grace Dela Cruz",
+      date: "October 1, 2025",
+      img: ImageHolder2,
+      category: "FEATURES",
+      description:
+        "The new literacy initiative aims to reach underserved communities and promote education for all.",
+    },
+    {
+      id: 2,
+      title: "Campus Journalism Summit 2025 Highlights Student Voices",
+      author: "Reanne Kate Esguerra",
+      date: "September 25, 2025",
+      img: ImageHolder3,
+      category: "SPECIALS",
+      description:
+        "Student journalists from across the country gathered to discuss the power of storytelling in shaping truth.",
+    },
+  ];
 
 
 
-export const CurrentArticle = [
-  {
-    id: 1,
-    category: "LITERARY",
-    date: "October 17 2025 at 2:58 PM",
-    title: "The Ones Who Light Our Path",
-    author: "Kierich Taguinin",
-    img: Literary1,
-    description: `The room was silent except for the sound of our heavy sighs when our professor broke the silence…
-“You need to make a project so your grades can be pulled up,” our professor said calmly. Her words broke the silence, though we still stared blankly at our desks.
-After hearing those words, we all turned our heads when our professor chuckled slightly, which made us look at her.
+  export const CurrentArticle = [
+    {
+      id: 1,
+      category: "LITERARY",
+      date: "October 17 2025 at 2:58 PM",
+      title: "The Ones Who Light Our Path",
+      author: "Kierich Taguinin",
+      img: Literary1,
+      description: `The room was silent except for the sound of our heavy sighs when our professor broke the silence…
+  “You need to make a project so your grades can be pulled up,” our professor said calmly. Her words broke the silence, though we still stared blankly at our desks.
+  After hearing those words, we all turned our heads when our professor chuckled slightly, which made us look at her.
 
-“Don’t worry, it’s only midterms. You can still make up for it in the finals,” she said.
-“I told you before, didn’t I? In this course, you won’t last long if you have a weak EQ. Don’t let your emotions lead the way, because once you do, everything else will be affected.”
-A quiet sigh of relief swept through the room.
+  “Don’t worry, it’s only midterms. You can still make up for it in the finals,” she said.
+  “I told you before, didn’t I? In this course, you won’t last long if you have a weak EQ. Don’t let your emotions lead the way, because once you do, everything else will be affected.”
+  A quiet sigh of relief swept through the room.
 
-“Don’t think that failing means you’re weak. Always remember, wherever you’re weak, that’s where you should focus on improving. And failing doesn’t mean you can’t recover—instead, think of your mistakes as your guide toward perfection. Those mistakes will lead you to learn so that next time, you’ll know what to do.”
+  “Don’t think that failing means you’re weak. Always remember, wherever you’re weak, that’s where you should focus on improving. And failing doesn’t mean you can’t recover—instead, think of your mistakes as your guide toward perfection. Those mistakes will lead you to learn so that next time, you’ll know what to do.”
 
-I smiled as I remembered those days—the days when we wanted to give up, the days when we lost hope of ever passing, and the days when we doubted if we should continue studying or just quit.
-“Congratulations.” I turned around and saw our professor.
+  I smiled as I remembered those days—the days when we wanted to give up, the days when we lost hope of ever passing, and the days when we doubted if we should continue studying or just quit.
+  “Congratulations.” I turned around and saw our professor.
 
-“Thank you, Ma’am,” I replied.
+  “Thank you, Ma’am,” I replied.
 
-As I slowly walked toward the stage, I carried with me a feeling of nervousness—not the kind I used to feel during recitations, but a mix of excitement and joy.
+  As I slowly walked toward the stage, I carried with me a feeling of nervousness—not the kind I used to feel during recitations, but a mix of excitement and joy.
 
-It felt like it was only yesterday when I cried because I failed the exam, when my quizzes were all failing marks, and when the projects I submitted weren’t that good.
+  It felt like it was only yesterday when I cried because I failed the exam, when my quizzes were all failing marks, and when the projects I submitted weren’t that good.
 
-It felt like it was only yesterday when we almost gave up and lost all hope—but because of our teachers, who became our source of encouragement through their cheerful words and who never got tired of reminding and cheering us up—we continued.
+  It felt like it was only yesterday when we almost gave up and lost all hope—but because of our teachers, who became our source of encouragement through their cheerful words and who never got tired of reminding and cheering us up—we continued.
 
-Our 𝐓𝐄𝐀𝐂𝐇𝐄𝐑𝐒 became the “light” that guided us in times when all we could see was darkness.
-We will never get tired of being grateful for all the lessons and advice you shared with us. We will carry them with us until we finish our studies and step into the real world.`,
-  },
-];
+  Our 𝐓𝐄𝐀𝐂𝐇𝐄𝐑𝐒 became the “light” that guided us in times when all we could see was darkness.
+  We will never get tired of being grateful for all the lessons and advice you shared with us. We will carry them with us until we finish our studies and step into the real world.`,
+    },
+  ];
 
+  export const Drafts = [
+    {
+      id: 1,
+      category: "LITERARY",
+      date: "October 17 2025 at 2:58 PM",
+      title: "The Ones Who Light Our Path",
+      author: "Kierich Taguinin",
+      img: Literary1,
+      description:
+        "The room was silent except for the sound of our heavy sighs when our professor broke the silence… ”You need to make a project so you...",
+    },
+    {
+      id: 2,
+      category: "LITERARY",
+      date: "October 15, 2025 at 8:40 AM",
+      title: "The Operator",
+      author: "Maria Geraldine Closa",
+      img: Literary2,
+      description:
+        "Inside the hum of progress,someone turns the unseen gears. A quiet hand aligns the pipes of wisdom, feeds the lessons through...",
+    },
+    {
+      id: 3,
+      category: "LITERARY",
+      date: "October 14, 2025 at 5:42 PM",
+      title: "The Capes Behind The Bloom",
+      author: "Trixie Sarmiento",
+      img: Literary3,
+      description:
+        "When a flower blooms, would you praise it for growing, or would you appreciate the environment that allowed it to grow? You o...",
+    },
+    {
+      id: 4,
+      category: "LITERARY",
+      date: "October 5, 2025 at 8:29 PM",
+      title: "The One Who Held The Light",
+      author: "Reanne Kate Esguerra",
+      img: Literary4,
+      description:
+        "As Eve stepped closer to the auditorium, the music of the Grand March started echoing louder in her ears. She was greeted by the...",
+    },
+    {
+      id: 5,
+      category: "LITERARY",
+      date: "May 9, 2025 at 8:58 PM",
+      title: "Isang Biyaya Mula sa Maylikha!",
+      author: "Princess Shane Robles",
+      img: Literary5,
+      description:
+        "Kailanma’y hindi sapat ang anomang tula’t mga salita upang maparamdam ang wagas na pagmamahal ng isang magulang.  Minsa...",
+    },
+    {
+      id: 6,
+      category: "LITERARY",
+      date: "May 1, 2025 at 10:38 PM",
+      title: "Tinig ng Pagsusumikap at Sakripisyo",
+      author: "Princess Shane Robles",
+      img: Literary6,
+      description:
+        "Ngayon, ating ipinagdiriwang ang araw ng pagkilala sa mga manggagawang Pilipino Na walang sawang nagpapakapagod, nagsasak...",
+    },
+    {
+      id: 7,
+      category: "LITERARY",
+      date: "May 1, 2025 at 10:38 PM",
+      title: "Tinig ng Pagsusumikap at Sakripisyo",
+      author: "Princess Shane Robles",
+      img: Literary6,
+      description:
+        "Ngayon, ating ipinagdiriwang ang araw ng pagkilala sa mga manggagawang Pilipino Na walang sawang nagpapakapagod, nagsasak...",
+    },
+  ]
 
 
 export const Specials = [
@@ -368,7 +440,7 @@ export const Literary = [
 export const Arts = [
   {
     id: 1,
-    category: "Artss",
+    category: "Arts",
     date: "May 1, 2025 at 4:14 PM",
     title: "Summer Season",
     author: "Aldous Emerson Tayer",

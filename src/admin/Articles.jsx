@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Container,
@@ -10,43 +10,40 @@ import {
   Image,
   Divider,
   Alert,
-  SimpleGrid, // ✅ correct place
+  SimpleGrid,
   Card,
   ActionIcon,
+  Modal,
 } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { IconCheck, IconThumbUp, IconBrandFacebook, IconLink, IconEdit, IconTrash, IconCalendar } from "@tabler/icons-react";
 import AdminHeader from "../components/AdminHeader";
+import Footer from "../components/Footer";
 import Literary1 from "../assets/Literary1.png"; 
 import { Literary } from "../data/articles";
-import { useState } from "react";
-
 
 function ArticlePage() {
+  const [likes, setLikes] = useState(5); // initial likes
+  const [copied, setCopied] = useState(false);
+  const [deleteModalOpened, setDeleteModalOpened] = useState(false);
 
-const [likes, setLikes] = useState(5); // initial likes
-const [copied, setCopied] = useState(false);
+  const handleLike = () => setLikes(likes + 1);
 
-const handleLike = () => {
-  setLikes(likes + 1);
-};
+  const handleShareFacebook = () => {
+    const url = window.location.href;
+    const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+    window.open(facebookShareUrl, "_blank");
+  };
 
-const handleShareFacebook = () => {
-  const url = window.location.href;
-  const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-  window.open(facebookShareUrl, "_blank");
-};
-
-const handleCopyLink = async () => {
-  try {
-    await navigator.clipboard.writeText(window.location.href);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  } catch (err) {
-    console.error("Failed to copy link: ", err);
-  }
-};
-
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy link: ", err);
+    }
+  };
 
   return (
     <>
@@ -71,49 +68,54 @@ const handleCopyLink = async () => {
         />
 
         <Box mt="lg">
-        {/* Title row: Category + Edit/Delete aligned horizontally */}
-        <Group justify="space-between" align="center" mb="xs">
+          {/* Title row: Category + Edit/Delete*/}
+          <Group justify="space-between" align="center" mb="xs">
             <Badge
-            color="teal"
-            variant="filled"
-            radius="sm"
-            style={{
+              color="teal"
+              variant="filled"
+              radius="sm"
+              style={{
                 backgroundColor: "#eaf2e0",
                 color: "#3a6629",
                 fontWeight: 600,
                 letterSpacing: 0.5,
-            }}
+              }}
             >
-            LITERARY
+              LITERARY
             </Badge>
 
             <Group>
-            <Button size="sm" color="blue" radius="sm">
+              <Button size="sm" color="blue" radius="sm">
                 Edit
-            </Button>
-            <Button size="sm" color="red" radius="sm">
+              </Button>
+              <Button
+                size="sm"
+                color="red"
+                radius="sm"
+                onClick={() => setDeleteModalOpened(true)}
+              >
                 Delete
-            </Button>
+              </Button>
             </Group>
-        </Group>
+          </Group>
 
-        {/* Title */}
-        <Title order={2} fw={700} mb="xs">
+          {/* Title */}
+          <Title order={2} fw={700} mb="xs">
             The Ones Who Light Our Path
-        </Title>
+          </Title>
 
-        {/* Author and date */}
-        <Group gap="xs">
+          {/* Author and date */}
+          <Group gap="xs">
             <Text size="sm">
-            Written by{" "}
-            <Text component="span" fw={600} c="blue">
+              Written by{" "}
+              <Text component="span" fw={600} c="blue">
                 Kierich Taguin
-            </Text>
+              </Text>
             </Text>
             <Text size="sm" c="dimmed">
-            October 17, 2025 at 2:58 PM
+              October 17, 2025 at 2:58 PM
             </Text>
-        </Group>
+          </Group>
         </Box>
 
         <Divider my="md" />
@@ -141,6 +143,7 @@ const handleCopyLink = async () => {
           Art by: Ashley Mananquil
         </Text>
 
+        {/* Article content */}
         <Box mt="xl">
           <Text align="center" lh="xl" mt="xl">
             The room was silent except for the sound of our heavy sighs when our professor broke the silence… “You need to make a project so your grades can be pulled up,” our professor said calmly. Her words broke the silence, though we still stared blankly at our desks.After hearing those words, we all turned our heads when our professor chuckled slightly, which made us look at her.
@@ -181,162 +184,214 @@ const handleCopyLink = async () => {
 
         <Divider my="md" />
 
-<Box
-  mt="lg"
-  mb="lg"
-  style={{
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: "40px", // adjust spacing between buttons
+        {/* Likes, share, copy */}
+        <Box
+          mt="lg"
+          mb="lg"
+          style={{
+            display: "flex",
+            justifyContent: "left",
+            alignItems: "center",
+            gap: "40px",
+          }}
+        >
+          <Group spacing={6} style={{ cursor: "pointer" }} onClick={handleLike}>
+            <IconThumbUp size={18} color="#000" />
+            <Text fw={500}>{likes} Likes</Text>
+          </Group>
+
+          <Group
+            spacing={6}
+            style={{ cursor: "pointer", color: "#1877f2" }}
+            onClick={handleShareFacebook}
+          >
+            <IconBrandFacebook size={18} color="#1877f2" />
+            <Text fw={500}>Share on Facebook</Text>
+          </Group>
+
+          <Group
+            spacing={6}
+            style={{ cursor: "pointer", color: "#000" }}
+            onClick={handleCopyLink}
+          >
+            <IconLink size={18} />
+            <Text fw={500}>{copied ? "Copied!" : "Copy Link"}</Text>
+          </Group>
+        </Box>
+
+        <Divider my="md" />
+
+        <Text fz="xl" fw={700} mb="lg">
+          More from this Category
+        </Text>
+
+        {/* More from this Category */}
+        <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="lg">
+          {Literary.slice(0, 6).map((article) => (
+            <Card
+              key={article.id}
+              component={Link}
+              to={`/articles/${article.id}`} 
+              shadow="sm"
+              radius="md"
+              withBorder
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                padding: "1rem",
+                textDecoration: "none", 
+                color: "inherit", 
+              }}
+            >
+              {/* Image */}
+              <Box pos="relative">
+                <Image
+                  src={article.img || Literary1}
+                  alt={article.title}
+                  radius="md"
+                  height={180}
+                  style={{ objectFit: "cover" }}
+                />
+                <Group pos="absolute" top={8} right={8} spacing={8}>
+                  <ActionIcon
+                    color="blue"
+                    radius="xl"
+                    variant="filled"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <IconEdit size={16} />
+                  </ActionIcon>
+                  <ActionIcon
+                    color="red"
+                    radius="xl"
+                    variant="filled"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setDeleteModalOpened(true);
+                    }}
+                  >
+                    <IconTrash size={16} />
+                  </ActionIcon>
+                </Group>
+              </Box>
+
+              {/* Content */}
+              <Box mt="sm" style={{ flexGrow: 1 }}>
+                <Box
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginBottom: "10px",
+                  }}
+                >
+                  <Badge
+                    color="teal"
+                    size="sm"
+                    variant="filled"
+                    style={{
+                      textTransform: "uppercase",
+                      letterSpacing: "0.5px",
+                      fontWeight: 600,
+                      backgroundColor: "#eaf2e0",
+                      color: "#2f5d26",
+                      cursor: "pointer",
+                    }}
+                    component={Link}
+                    to={`/category/${article.category.toLowerCase()}`}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {article.category}
+                  </Badge>
+
+                  <Group gap={6} align="center" style={{ color: "#6c757d" }}>
+                    <IconCalendar size={14} stroke={1.5} />
+                    <Text size="xs" c="dimmed">
+                      {article.date}
+                    </Text>
+                  </Group>
+                </Box>
+
+                <Text fw={700} size="lg" mb={8} lineClamp={2}>
+                  {article.title}
+                </Text>
+
+                <Text size="sm" c="dimmed" lineClamp={3} mb="md">
+                  {article.description}
+                </Text>
+              </Box>
+
+              <Text
+                size="sm"
+                fw={500}
+                c="gray"
+                mt="auto"
+                style={{ alignSelf: "flex-start", fontStyle: "italic" }}
+              >
+                {article.author}
+              </Text>
+            </Card>
+          ))}
+        </SimpleGrid>
+      </Container>
+
+      <Footer />
+
+      {/* Delete Modal */}
+<Modal
+  opened={deleteModalOpened}
+  onClose={() => setDeleteModalOpened(false)}
+  centered
+  withCloseButton={false}
+  styles={{
+    header: { display: "none" }, 
+    body: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      textAlign: "center",
+      paddingTop: "20px"
+    },
   }}
 >
-  {/* Likes */}
-  <Group spacing={6} style={{ cursor: "pointer" }} onClick={handleLike}>
-    <IconThumbUp size={18} color="#000" />
-    <Text fw={500}>{likes} Likes</Text>
-  </Group>
+  <Title order={3} mb="sm" style={{ textAlign: "center" }}>
+    Are you sure?
+  </Title>
 
-  {/* Share on Facebook */}
-  <Group
-    spacing={6}
-    style={{ cursor: "pointer", color: "#1877f2" }}
-    onClick={handleShareFacebook}
+  <Text mb="lg" size="sm" style={{ maxWidth: "260px" }}>
+    Are you sure you want to delete this article? This action will permanently delete this article.
+  </Text>
+
+  <Button
+    fullWidth
+    color="red"
+    radius="xl"
+    size="md"
+    mb="sm"
+    onClick={() => {
+      setDeleteModalOpened(false);
+      console.log("Article deleted!");
+    }}
   >
-    <IconBrandFacebook size={18} color="#1877f2" />
-    <Text fw={500}>Share on Facebook</Text>
-  </Group>
+    Delete
+  </Button>
 
-  {/* Copy Link */}
-  <Group
-    spacing={6}
-    style={{ cursor: "pointer", color: "#000" }}
-    onClick={handleCopyLink}
+  <Button
+    fullWidth
+    variant="outline"
+    radius="xl"
+    size="md"
+    onClick={() => setDeleteModalOpened(false)}
   >
-    <IconLink size={18} />
-    <Text fw={500}>{copied ? "Copied!" : "Copy Link"}</Text>
-  </Group>
-</Box>
+    Cancel
+  </Button>
+</Modal>
 
 
 
-    <Divider my="md" />
 
-      <Text fz="xl" fw={700} mb="lg">
-        Edit Article
-      </Text>
-
-    {/* More from this Category */}
-    <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="lg">
-    {Literary.slice(0, 6).map((article) => (
-        <Card
-        key={article.id}
-        component={Link}
-        to={`/articles/${article.id}`} // link to full article page
-        shadow="sm"
-        radius="md"
-        withBorder
-        style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            padding: "1rem",
-            textDecoration: "none", 
-            color: "inherit", 
-        }}
-        >
-        {/* 🖼️ Image */}
-        <Box pos="relative">
-            <Image
-            src={article.img || Literary1}
-            alt={article.title}
-            radius="md"
-            height={180}
-            style={{ objectFit: "cover" }}
-            />
-            <Group pos="absolute" top={8} right={8} spacing={8}>
-            <ActionIcon
-                color="blue"
-                radius="xl"
-                variant="filled"
-                onClick={(e) => e.stopPropagation()} // prevent card navigation
-            >
-                <IconEdit size={16} />
-            </ActionIcon>
-            <ActionIcon
-                color="red"
-                radius="xl"
-                variant="filled"
-                onClick={(e) => e.stopPropagation()}
-            >
-                <IconTrash size={16} />
-            </ActionIcon>
-            </Group>
-        </Box>
-
-        {/* 📄 Content Section */}
-        <Box mt="sm" style={{ flexGrow: 1 }}>
-            <Box
-            style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: "10px",
-            }}
-            >
-            <Badge
-                color="teal"
-                size="sm"
-                variant="filled"
-                style={{
-                textTransform: "uppercase",
-                letterSpacing: "0.5px",
-                fontWeight: 600,
-                backgroundColor: "#eaf2e0",
-                color: "#2f5d26",
-                cursor: "pointer",
-                }}
-                component={Link}
-                to={`/category/${article.category.toLowerCase()}`}
-                onClick={(e) => e.stopPropagation()} // prevent card navigation when clicking badge
-            >
-                {article.category}
-            </Badge>
-
-            <Group gap={6} align="center" style={{ color: "#6c757d" }}>
-                <IconCalendar size={14} stroke={1.5} />
-                <Text size="xs" c="dimmed">
-                {article.date}
-                </Text>
-            </Group>
-            </Box>
-
-            {/* Title */}
-            <Text fw={700} size="lg" mb={8} lineClamp={2}>
-            {article.title}
-            </Text>
-
-            {/* Description */}
-            <Text size="sm" c="dimmed" lineClamp={3} mb="md">
-            {article.description}
-            </Text>
-        </Box>
-
-        {/* ✍️ Author at bottom-left */}
-        <Text
-            size="sm"
-            fw={500}
-            c="gray"
-            mt="auto"
-            style={{ alignSelf: "flex-start", fontStyle: "italic" }}
-        >
-            {article.author}
-        </Text>
-        </Card>
-    ))}
-    </SimpleGrid>
-
-      </Container>
     </>
   );
 }
