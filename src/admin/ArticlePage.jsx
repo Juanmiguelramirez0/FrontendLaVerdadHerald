@@ -1,6 +1,7 @@
 // src/pages/ArticlePage.jsx
 import { useLocation, useParams } from "react-router-dom";
 import { Alert, Title, Text, Badge, Image, Button, Group, Box } from "@mantine/core";
+import { useEffect, useState } from "react";
 import { articles } from "../data/articles";
 
 export default function ArticlePage() {
@@ -8,13 +9,44 @@ export default function ArticlePage() {
   const { state } = useLocation();
   const article = articles.find((a) => a.id === parseInt(id));
 
+  const [showBanner, setShowBanner] = useState(state?.published || false);
+
+  useEffect(() => {
+    if (showBanner) {
+      const timer = setTimeout(() => {
+        setShowBanner(false);
+      }, 2500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [showBanner]);
+
   if (!article) return <Text>Article not found.</Text>;
 
   return (
     <Box>
-      {/* ✅ Show success message only if redirected after publishing */}
+
+      {/* 🎉 SUCCESS BANNER WITH SMOOTH AUTO-FADE */}
       {state?.published && (
-        <Alert color="green" variant="light" mb="md">
+        <Alert
+          color="green"
+          variant="filled"
+          style={{
+            position: "fixed",
+            top: "80px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 9999,
+            width: "90%",
+            maxWidth: "600px",
+
+            opacity: showBanner ? 1 : 0,
+            transform: showBanner
+              ? "translate(-50%, 0)"
+              : "translate(-50%, -20px)",
+            transition: "opacity 0.8s ease, transform 0.8s ease",
+          }}
+        >
           Article Published Successfully!
         </Alert>
       )}

@@ -10,7 +10,8 @@ import {
   Group,
 } from "@mantine/core";
 import { IconUpload } from "@tabler/icons-react";
-import AdminHeader from "../components/AdminHeader";
+import CoordinatorHeader from "../components/CoordinatorHeader";
+
 
 function EditArticle() {
   const [image, setImage] = useState(null);
@@ -25,7 +26,7 @@ function EditArticle() {
   return (
     <>
 
-    <AdminHeader />
+    <CoordinatorHeader />
 
 
     <Container size="md" py="xl">
@@ -33,6 +34,22 @@ function EditArticle() {
         Edit Article
       </Text>
 
+      {/* Title */}
+      <Box mb="md">
+        <Text fw={500} mb="xs">
+          Title
+        </Text>
+        <TextInput
+          placeholder="Prefilled Title"
+          defaultValue="Prefilled Title"
+          styles={{
+            input: {
+              border: "1px solid #000",
+              borderRadius: "6px",
+            },
+          }}
+        />
+      </Box>
 
       {/* Author */}
       <Box mb="md">
@@ -51,67 +68,64 @@ function EditArticle() {
         />
       </Box>
 
-      {/* Cover Image */}
-      <Box mb="md">
-        <Text fw={500} mb="xs">
-          Cover Image
-        </Text>
+{/* Cover Image */}
+<Box mb="md">
+  <Text fw={500} mb="xs">
+    Cover Image
+  </Text>
 
-        <Box
+  <Box
+    style={{
+      border: "1px solid #000",
+      borderRadius: "6px",
+      padding: "10px",
+    }}
+  >
+    {/* Use a <label> for click handling */}
+    <label
+      htmlFor="cover-image"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        cursor: "pointer",
+        minHeight: "120px",
+        border: "2px dashed #ccc",
+        borderRadius: "6px",
+        backgroundColor: "#f8f9fa",
+        width: "100%",
+      }}
+    >
+      {image ? (
+        <img
+          src={image}
+          alt="Cover Preview"
           style={{
-            border: "1px solid #000",
-            borderRadius: "6px",
-            padding: "10px",
+            maxWidth: "100%",
+            maxHeight: "250px",
+            borderRadius: "8px",
+            objectFit: "cover",
           }}
-        >
-          {/* clickable label */}
-          <label
-            htmlFor="cover-image"
-            style={{
-              border: "2px dashed #ccc",
-              borderRadius: "6px",
-              backgroundColor: "#f8f9fa",
-              textAlign: "center",
-              padding: "20px",
-              cursor: "pointer",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              minHeight: "120px",
-            }}
-          >
-            {image ? (
-              <img
-                src={image}
-                alt="Cover Preview"
-                style={{
-                  maxWidth: "100%",
-                  maxHeight: "250px",
-                  borderRadius: "8px",
-                  objectFit: "cover",
-                }}
-              />
-            ) : (
-              <>
-                <IconUpload size={30} color="#777" />
-                <Text size="sm" mt="xs" c="dimmed">
-                  Click or drag image to upload
-                </Text>
-              </>
-            )}
-          </label>
-
-          {/* actual hidden file input */}
-          <input
-            id="cover-image"
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            style={{ display: "none" }}
-          />
-        </Box>
-      </Box>
+        />
+      ) : (
+        <>
+          <IconUpload size={30} color="#777" />
+          <Text size="sm" mt="xs" c="dimmed">
+            Click or drag image to upload
+          </Text>
+        </>
+      )}
+      <input
+        id="cover-image"
+        type="file"
+        accept="image/*"
+        onChange={handleImageChange}
+        style={{ display: "none" }}
+      />
+    </label>
+  </Box>
+</Box>
 
 
       {/* Category */}

@@ -13,11 +13,12 @@ import {
 import { IconUpload } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import { notifications } from "@mantine/notifications";
-import { articles } from "../data/articles";
-import AdminHeader from "../components/AdminHeader";
-import AdminSidebar from "../components/AdminSidebar.jsx";
+import { articles } from "../data/articles.js";
+import CoordinatorHeader from "../components/CoordinatorHeader.jsx";
+import CoordinatorSidebar from "../components/CoordinatorSidebar.jsx";
+import { motion } from "framer-motion";
 
-export default function CreateArticle() {
+export default function CoordinatorCreateArticle() {
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
@@ -27,15 +28,16 @@ export default function CreateArticle() {
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
 
-  const inputRef = useRef(null); // ✅ Ref for hidden file input
+  const inputRef = useRef(null); 
 
-  const sidebarLinks = [
-    { label: "Dashboard", path: "/admin" },
-    { label: "Create Article", path: "/admin/create-article" },
-    { label: "Manage Articles", path: "/admin/manage-articles" },
-    { label: "Users", path: "/admin/users" },
-    { label: "Settings", path: "/admin/settings" },
-  ];
+const sidebarLinks = [
+  { label: "Dashboard", path: "/coordinator/dashboard" },
+  { label: "Create Article", path: "/coordinator/create-article" },
+  { label: "Manage Articles", path: "/coordinator/manage-articles" },
+  { label: "Writers", path: "/coordinator/manage-writers" },
+  { label: "Settings", path: "/coordinator/settings" },
+];
+
 
   // 📸 Handle Image Upload + Preview
   const handleImageChange = (e) => {
@@ -94,12 +96,19 @@ export default function CreateArticle() {
 
   return (
     <>
-      <AdminHeader />
-
+          <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+              style={{ width: "100%" }}
+              >  
+    
+      <CoordinatorHeader />
 
 
       <div style={{ display: "flex", height: "calc(100vh - 64px)" }}>
-        <AdminSidebar links={sidebarLinks} />
+        <CoordinatorSidebar links={sidebarLinks} />
 
         <Box
           style={{
@@ -247,6 +256,7 @@ export default function CreateArticle() {
           </Container>
         </Box>
       </div>
+    </motion.div>  
     </>
   );
 }

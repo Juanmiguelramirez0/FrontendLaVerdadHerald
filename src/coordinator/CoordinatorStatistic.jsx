@@ -13,17 +13,16 @@ import {
 import { motion } from "framer-motion";
 import { IconEdit, IconFileText, IconUsersGroup, IconListDetails } from "@tabler/icons-react";
 
-// 🖼️ Custom icons
+//  Custom icons
 import RegisteredUserIcon from "../assets/admin-images/RegisteredUser.png";
 import ViewsIcon from "../assets/admin-images/ViewsIcon.png";
 import PublishArticlesIcon from "../assets/admin-images/PublishArticles.png";
 import LikesIcon from "../assets/admin-images/LikesIcon.png";
 
-import Header from "../components/Header.jsx";
-import AdminSidebar from "../components/AdminSidebar.jsx";
-import AdminHeader from "../components/AdminHeader.jsx";
+import CoordinatorHeader from "../components/CoordinatorHeader.jsx";
+import CoordinatorSidebar from "../components/CoordinatorSidebar.jsx";
 
-export default function Statistics() {
+export default function CoordinatorStatistic() {
   const stats = [
     { label: "Registered Users", value: "112", icon: RegisteredUserIcon },
     { label: "Total Views", value: "1,000", icon: ViewsIcon },
@@ -73,12 +72,11 @@ export default function Statistics() {
               transition={{ duration: 0.6, ease: "easeInOut" }}
               style={{ width: "100%" }}
             >
-      <AdminHeader />
-
+      <CoordinatorHeader />
 
       <div style={{ display: "flex", height: "calc(100vh - 64px)" }}>
         {/* Sidebar */}
-        <AdminSidebar links={sidebarLinks} />
+        <CoordinatorSidebar links={sidebarLinks} />
 
         {/* Main Content */}
         <Box

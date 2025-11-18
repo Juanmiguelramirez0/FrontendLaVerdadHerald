@@ -5,20 +5,22 @@ import {
   Group,
   Anchor,
   Menu,
-  Title,
   ActionIcon,
+  Title
 } from "@mantine/core";
 import { IconLogout, IconSearch } from "@tabler/icons-react";
 import { motion } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
+
 import Lvlogowhitebg from "../assets/Lvlogowhitebg.png";
 import Lvherald from "../assets/Lvherald.png";
 import header3 from "../assets/header3.png";
+
 import UserSettingsIcon from "../assets/admin-images/UserSettingsIcon.png";
 import ProfileIcon from "../assets/admin-images/ProfileIcon.png";
 
-export default function AdminHeader() {
+export default function CoordinatorMainHeader() {
   const navigate = useNavigate();
   const [showSearch, setShowSearch] = useState(false);
 
@@ -50,7 +52,7 @@ export default function AdminHeader() {
         bg="#1e4b63"
         c="white"
         py="md"
-        onClick={() => navigate("/admin/dashboard")} // ✅ click anywhere on header
+        onClick={() => navigate("/coordinator/dashboard")}
         style={{ cursor: "pointer", userSelect: "none" }}
       >
         {/* Background overlay */}
@@ -97,7 +99,7 @@ export default function AdminHeader() {
 
             {/* === Right Icons === */}
             <Group spacing="sm" style={{ marginLeft: "auto" }}>
-              {/* ⚙️ SETTINGS ICON */}
+              {/* ⚙️ SETTINGS (COORDINATOR) */}
               <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 1 }}>
                 <ActionIcon
                   variant="transparent"
@@ -105,18 +107,14 @@ export default function AdminHeader() {
                   size="lg"
                   onClick={(e) => {
                     e.stopPropagation();
-                    navigate("/admin/settings");
+                    navigate("/coordinator/settings");
                   }}
                   style={{ cursor: "pointer", padding: 4 }}
                 >
                   <img
                     src={UserSettingsIcon}
-                    alt="User Settings"
-                    style={{
-                      width: "26px",
-                      height: "26px",
-                      objectFit: "contain",
-                    }}
+                    alt="Settings"
+                    style={{ width: "26px", height: "26px", objectFit: "contain" }}
                   />
                 </ActionIcon>
               </motion.div>
@@ -130,7 +128,7 @@ export default function AdminHeader() {
                       radius="xl"
                       size="lg"
                       style={{ cursor: "pointer" }}
-                      onClick={(e) => e.stopPropagation()} 
+                      onClick={(e) => e.stopPropagation()}
                     >
                       <img
                         src={ProfileIcon}
@@ -153,16 +151,13 @@ export default function AdminHeader() {
                       <img
                         src={ProfileIcon}
                         alt="Profile"
-                        style={{
-                          width: "18px",
-                          height: "18px",
-                          objectFit: "contain",
-                        }}
+                        style={{ width: "18px", height: "18px" }}
                       />
                     }
                   >
                     Profile
                   </Menu.Item>
+
                   <Menu.Item
                     color="red"
                     leftSection={<IconLogout size={18} />}
@@ -182,11 +177,7 @@ export default function AdminHeader() {
         <Container size="xl">
           <Group justify="center" align="center" gap="3rem">
             {navLinks.map((link) => (
-              <motion.div
-                key={link}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
+              <motion.div key={link} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
                 <Anchor
                   component={Link}
                   to={`/${link.toLowerCase().replace(" ", "-")}`}
@@ -194,16 +185,9 @@ export default function AdminHeader() {
                   fw={700}
                   fz="sm"
                   underline="never"
-                  style={{
-                    textTransform: "uppercase",
-                    transition: "color 0.2s ease",
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.color = "yellow")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = "#2c6072")
-                  }
+                  style={{ textTransform: "uppercase", transition: "color 0.2s ease" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "yellow")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "#2c6072")}
                 >
                   {link}
                 </Anchor>
@@ -218,12 +202,8 @@ export default function AdminHeader() {
                 radius="xl"
                 size="lg"
                 onClick={(e) => {
-                  e.stopPropagation(); 
+                  e.stopPropagation();
                   navigate("/search");
-                }}
-                style={{
-                  marginLeft: "8px",
-                  transition: "transform 0.2s ease",
                 }}
               >
                 <IconSearch size={20} />
@@ -232,36 +212,6 @@ export default function AdminHeader() {
           </Group>
         </Container>
       </Box>
-
-            {/* ================= BANNER ================= */}
-
-
-            <Box
-              pos="relative"
-              h="60px"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                background: "linear-gradient(to bottom, #006EE0 0%, #0009AB 100%)",
-              }}
-            >
-              <Title
-                order={1}
-                style={{
-                  color: "white",
-                  fontFamily: "Georgia, serif",
-                  fontWeight: 700,
-                  letterSpacing: "3px",
-                  lineHeight: 1,
-                  fontSize: "24px",
-                  textShadow: "0 2px 6px rgba(0,0,0,0.4)",
-                }}
-              >
-                Admin | Dashboard
-              </Title>
-            </Box>
-      
     </>
   );
 }

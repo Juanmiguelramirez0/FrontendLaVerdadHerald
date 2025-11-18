@@ -25,7 +25,6 @@ import Sports from "./nav-header/Sports.jsx";
 import About from "./nav-header/About.jsx";
 
 // ===== ADMIN PAGES =====
-// import AdminDashboard from "./admin/Statistics.jsx";
 import CreateArticle from "./admin/CreateArticle.jsx";
 import ManageModerators from "./admin/ManageModerators.jsx";
 import DraftArticles from "./admin/DraftArticles.jsx";
@@ -38,7 +37,11 @@ import Articles from "./admin/Articles.jsx";
 
 // ===== COORDINATOR PAGES =====
 import CoordinatorDashboard from "./coordinator/CoordinatorDashboard.jsx";
-import ManageWriters from "./coordinator/ManageWriters.jsx";
+import CoordinatorCreateArticle from "./coordinator/CoordinatorCreateArticle.jsx";
+import CoordinatorStatistic from "./coordinator/CoordinatorStatistic.jsx";
+import CoordinatorDraftArticle from "./coordinator/CoordinatorDraftArticle.jsx";
+import CoordinatorEditArticlePage from "./coordinator/CoordinatorEditArticlePage.jsx";
+
 
 // ===== ROUTES COMPONENT =====
 function AnimatedRoutes() {
@@ -92,11 +95,16 @@ function AnimatedRoutes() {
 
         {/* ================= COORDINATOR ROUTES ================= */}
         <Route path="/coordinator/dashboard" element={<CoordinatorDashboard />} />
-        <Route path="/coordinator/manage-writers" element={<ManageWriters />} />
+        <Route path="/coordinator/create-article" element={<CoordinatorCreateArticle />} />
+        <Route path="/coordinator/statistic" element={<CoordinatorStatistic />} />
+        <Route path="/coordinator/draft-article" element={<CoordinatorDraftArticle />} />
+        <Route path="/coordinator/edit-article" element={<CoordinatorEditArticlePage />} />
+
 
         {/* ================= SIDENAV ROUTES ================= */}
 
-                <Route path="*" element={<AdminDashboard />} />
+        {/* LAST — wildcard */}
+        <Route path="*" element={<div>Page not found</div>} />
       </Routes>
     </AnimatePresence>
   );
