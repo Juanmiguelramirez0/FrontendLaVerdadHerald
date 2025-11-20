@@ -1,19 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Container, Paper, Group, Title } from "@mantine/core";
-import { IconEdit, IconFileText, IconUsersGroup, IconListDetails } from "@tabler/icons-react";
+import { motion } from "framer-motion";
 
 import CoordinatorSidebar from "../components/CoordinatorSidebar";
 import CoordinatorHeader from "../components/CoordinatorHeader";
-import CoordinatorDraftActions from "../components/CoordinatorDraft/CoordinatorDraftActions"; 
-import CoordinatorDraftImage from "../components/CoordinatorDraft/CoordinatorDraftImage"; 
+import CoordinatorDraftActions from "../components/CoordinatorDraft/CoordinatorDraftActions";
+import CoordinatorDraftImage from "../components/CoordinatorDraft/CoordinatorDraftImage";
 import CoordinatorDraftContent from "../components/CoordinatorDraft/CoordinatorDraftContent";
-import { motion } from "framer-motion"; 
+import SuccessBanner from "../components/CoordinatorDraft/SuccessBanner";
 
 import Literary1 from "../assets/Literary1.png";
 import Literary2 from "../assets/Literary2.png";
 import Literary3 from "../assets/Literary3.png";
 
 export default function CoordinatorDraftPage() {
+  const [showBanner, setShowBanner] = useState(false);
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.get("updateSuccess") === "true") {
+      setShowBanner(true);
+    }
+  }, []);
+
   const drafts = [
     {
       id: 1,
@@ -44,85 +53,90 @@ export default function CoordinatorDraftPage() {
     },
   ];
 
-  const sidebarLinks = [
-    { label: "Statistics", icon: <IconListDetails size={16} />, to: "/admin/dashboard" },
-    { label: "Create Article", icon: <IconEdit size={16} />, to: "/admin/create-article" },
-    { label: "Draft Articles", icon: <IconFileText size={16} />, to: "/admin/draft-articles" },
-    { label: "Manage Moderators", icon: <IconUsersGroup size={16} />, to: "/admin/moderators" },
-    { label: "Audit Trail", icon: <IconListDetails size={16} />, to: "/admin/audit-trail" },
-  ];
-
   return (
     <>
-          <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-              style={{ width: "100%" }}
-              >
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+        style={{ width: "100%" }}
+      >
+        {/* 🟦 TOP HEADER */}
+        <CoordinatorHeader />
 
-      < CoordinatorHeader />
+        <Box style={{ display: "flex", flexDirection: "row" }}>
+          {/* 🟪 LEFT SIDEBAR */}
+          <CoordinatorSidebar />
 
-      <Box style={{ display: "flex" }}>
-        <CoordinatorSidebar />
+          {/* 🟩 RIGHT CONTENT AREA */}
+          <Box style={{ flex: 1 }}>
 
-        <Container size="xl" py="lg">
-          <Group mb="lg">
-            <Title order={2} style={{ fontFamily: "Georgia, serif" }}>
-              DRAFTS
-            </Title>
-            <Title order={2} style={{ fontSize: "28px", cursor: "pointer", marginLeft: 4 }}>
-              +
-            </Title>
-          </Group>
+            {/* 🟧 SUCCESS BANNER (Correct placement) */}
+            {showBanner && (
+              <SuccessBanner
+                message="Article updated successfully!"
+                duration={3000}
+                onHide={() => setShowBanner(false)}
+              />
+            )}
 
-          {drafts.map((draft) => (
-            <Box
-              key={draft.id}
-              mb="lg"
-              style={{
-                display: "flex",
-                gap: "16px",
-                alignItems: "stretch",
-              }}
-            >
-              {/* Paper for image + content */}
-              <Paper
-                p="md"
-                radius="lg"
-                shadow="sm"
-                style={{
-                  flex: 1,
-                  display: "flex",
-                  alignItems: "center",
-                  border: "1px solid #e5e5e5",
-                }}
-              >
-                <CoordinatorDraftImage src={draft.img} alt={draft.title} />
-                <CoordinatorDraftContent draft={draft} />
-              </Paper>
+            <Container size="xl" py="lg">
+              <Group mb="lg">
+                <Title order={2} style={{ fontFamily: "Georgia, serif" }}>
+                  DRAFTS
+                </Title>
+              </Group>
+{drafts.map((draft) => (
+  <Box
+    key={draft.id}
+    mb="lg"
+    style={{
+      display: "flex",
+      gap: "16px",
+      alignItems: "center", // vertically center both content and actions
+    }}
+  >
+    {/* Draft content */}
+    <Paper
+      p="md"
+      radius="lg"
+      shadow="sm"
+      style={{
+        flex: 1,
+        display: "flex",
+        alignItems: "center",
+        border: "1px solid #e5e5e5",
+      }}
+    >
+      <CoordinatorDraftImage src={draft.img} alt={draft.title} />
+      <CoordinatorDraftContent draft={draft} />
+    </Paper>
 
-              {/* Separate Paper for actions */}
-              <Paper
-                p="sm"
-                radius="lg"
-                shadow="xs"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  border: "1px solid #e5e5e5",
-                  width: "fit-content",
-                  alignSelf: "stretch",
-                }}
-              >
-                <CoordinatorDraftActions draft={draft} />
-              </Paper>
-            </Box>
-          ))}
-        </Container>
-      </Box>
+    {/* Actions box centered vertically */}
+    <Paper
+      p="sm"
+      radius="lg"
+      shadow="xs"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center", 
+        alignItems: "center",    
+        border: "1px solid #e5e5e5",
+        width: "150px",
+        minHeight: "fit-content", 
+        height: "100px",
+      }}
+    >
+      <CoordinatorDraftActions draft={draft} />
+    </Paper>
+  </Box>
+))}
+
+            </Container>
+          </Box>
+        </Box>
       </motion.div>
     </>
   );

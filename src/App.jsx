@@ -41,6 +41,7 @@ import CoordinatorCreateArticle from "./coordinator/CoordinatorCreateArticle.jsx
 import CoordinatorStatistic from "./coordinator/CoordinatorStatistic.jsx";
 import CoordinatorDraftArticle from "./coordinator/CoordinatorDraftArticle.jsx";
 import CoordinatorEditArticlePage from "./coordinator/CoordinatorEditArticlePage.jsx";
+import CoordinatorAuditTrail from "./coordinator/CoordinatorAuditTrail.jsx";
 
 
 // ===== ROUTES COMPONENT =====
@@ -99,6 +100,7 @@ function AnimatedRoutes() {
         <Route path="/coordinator/statistic" element={<CoordinatorStatistic />} />
         <Route path="/coordinator/draft-article" element={<CoordinatorDraftArticle />} />
         <Route path="/coordinator/edit-article" element={<CoordinatorEditArticlePage />} />
+        <Route path="/coordinator/audit-trail" element={<CoordinatorAuditTrail />} />
 
 
         {/* ================= SIDENAV ROUTES ================= */}

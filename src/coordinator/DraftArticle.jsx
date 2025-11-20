@@ -8,17 +8,14 @@ import {
   Textarea,
   Button,
   Group,
-  Title,
-  Alert,
 } from "@mantine/core";
-import { IconUpload, IconCheck } from "@tabler/icons-react";
+import { IconUpload } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import CoordinatorHeader from "../components/CoordinatorHeader";
 
 function CoordinatorEditArticle() {
   const navigate = useNavigate();
   const [image, setImage] = useState(null);
-  const [showBanner, setShowBanner] = useState(false);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -28,14 +25,10 @@ function CoordinatorEditArticle() {
   };
 
   const handleUpdateArticle = () => {
-    // Simulate article update API call here
-    setShowBanner(true);
-
-    // Hide banner after 4 seconds
-    setTimeout(() => {
-      setShowBanner(false);
-      navigate("/admin/create-article"); // Redirect after banner fades
-    }, 4000);
+    // Redirect back to draft page with success banner
+    navigate("/admin/draft-articles", {
+      state: { updateSuccess: true },
+    });
   };
 
   return (
@@ -43,34 +36,13 @@ function CoordinatorEditArticle() {
       <CoordinatorHeader />
 
       <Container size="md" py="xl">
-        {/* Success Banner */}
-        {showBanner && (
-          <Alert
-            icon={<IconCheck size={16} />}
-            title="Success!"
-            color="green"
-            mb="lg"
-            variant="filled"
-            styles={{
-              root: {
-                textAlign: "center",
-                fontWeight: 500,
-              },
-            }}
-          >
-            Draft created successfully
-          </Alert>
-        )}
-
         <Text fz="xl" fw={700} mb="lg">
           Edit Article
         </Text>
 
         {/* Title */}
         <Box mb="md">
-          <Text fw={500} mb="xs">
-            Title
-          </Text>
+          <Text fw={500} mb="xs">Title</Text>
           <TextInput
             placeholder="Prefilled Title"
             defaultValue="Prefilled Title"
@@ -82,9 +54,7 @@ function CoordinatorEditArticle() {
 
         {/* Author */}
         <Box mb="md">
-          <Text fw={500} mb="xs">
-            Author
-          </Text>
+          <Text fw={500} mb="xs">Author</Text>
           <TextInput
             placeholder="Prefilled Author"
             defaultValue="Prefilled Author"
@@ -96,9 +66,7 @@ function CoordinatorEditArticle() {
 
         {/* Cover Image */}
         <Box mb="md">
-          <Text fw={500} mb="xs">
-            Cover Image
-          </Text>
+          <Text fw={500} mb="xs">Cover Image</Text>
           <Box
             style={{
               border: "1px solid #000",
@@ -106,20 +74,18 @@ function CoordinatorEditArticle() {
               padding: "10px",
             }}
           >
-            <Box
+            <label
               htmlFor="cover-image"
               style={{
-                border: "2px dashed #ccc",
-                borderRadius: "6px",
-                backgroundColor: "#f8f9fa",
-                textAlign: "center",
-                padding: "20px",
-                cursor: "pointer",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
+                cursor: "pointer",
                 minHeight: "120px",
+                border: "2px dashed #ccc",
+                borderRadius: "6px",
+                backgroundColor: "#f8f9fa",
               }}
             >
               {image ? (
@@ -141,6 +107,7 @@ function CoordinatorEditArticle() {
                   </Text>
                 </>
               )}
+
               <input
                 id="cover-image"
                 type="file"
@@ -148,19 +115,25 @@ function CoordinatorEditArticle() {
                 onChange={handleImageChange}
                 style={{ display: "none" }}
               />
-            </Box>
+            </label>
           </Box>
         </Box>
 
         {/* Category */}
         <Box mb="md">
-          <Text fw={500} mb="xs">
-            Category
-          </Text>
+          <Text fw={500} mb="xs">Category</Text>
           <Select
             placeholder="Select Category"
             defaultValue="Literary"
-            data={["News", "Sports", "Opinion", "Literary", "Features", "Specials", "Art"]}
+            data={[
+              "News",
+              "Sports",
+              "Opinion",
+              "Literary",
+              "Features",
+              "Specials",
+              "Art",
+            ]}
             styles={{
               input: { border: "1px solid #000", borderRadius: "6px" },
             }}
@@ -169,24 +142,24 @@ function CoordinatorEditArticle() {
 
         {/* Tags */}
         <Box mb="md">
-          <Text fw={500} mb="xs">
-            Tags
-          </Text>
+          <Text fw={500} mb="xs">Tags</Text>
           <TextInput
             placeholder="Enter tags (comma separated)"
-            styles={{ input: { border: "1px solid #000", borderRadius: "6px" } }}
+            styles={{
+              input: { border: "1px solid #000", borderRadius: "6px" },
+            }}
           />
         </Box>
 
         {/* Content */}
         <Box mb="md">
-          <Text fw={500} mb="xs">
-            Content
-          </Text>
+          <Text fw={500} mb="xs">Content</Text>
           <Textarea
             placeholder="Article content here..."
             minRows={5}
-            styles={{ input: { border: "1px solid #000", borderRadius: "6px" } }}
+            styles={{
+              input: { border: "1px solid #000", borderRadius: "6px" },
+            }}
           />
         </Box>
 
