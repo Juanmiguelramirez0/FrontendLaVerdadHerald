@@ -4,7 +4,7 @@ import "@mantine/core/styles.css";
 import { AnimatePresence, motion } from "framer-motion";
 import { Notifications } from "@mantine/notifications";
 
-// ===== USER PAGES =====
+// ===== PAGES =====
 import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Dashboard";
 import Login from "./components/Login.jsx";
@@ -14,15 +14,17 @@ import SearchPage from "./pages/SearchPage";
 import Showarticles from "./pages/Showarticles.jsx";
 import FullArticles from "./pages/Showarticles.jsx";
 import AccountDeleted from "./pages/AccountDeleted";
+// import Contact from "./pages/ContactSection.jsx";
 import Opinion from "./nav-header/Opinion.jsx";
 import Literary from "./nav-header/Literary.jsx";
 import News from "./nav-header/News.jsx";
-import ContactUs from "./nav-header/ContactUs.jsx";
+// import ContactUs from "./nav-header/ContactUs.jsx";
 import Special from "./nav-header/Specials.jsx";
 import Art from "./nav-header/Art.jsx";
 import Feature from "./nav-header/Feature.jsx";
 import Sports from "./nav-header/Sports.jsx";
 import About from "./nav-header/About.jsx";
+
 
 // ===== ADMIN PAGES =====
 import CreateArticle from "./admin/CreateArticle.jsx";
@@ -42,6 +44,7 @@ import CoordinatorStatistic from "./coordinator/CoordinatorStatistic.jsx";
 import CoordinatorDraftArticle from "./coordinator/CoordinatorDraftArticle.jsx";
 import CoordinatorEditArticlePage from "./coordinator/CoordinatorEditArticlePage.jsx";
 import CoordinatorAuditTrail from "./coordinator/CoordinatorAuditTrail.jsx";
+// import Feedback from "./components/modal/feedback.jsx";
 
 
 // ===== ROUTES COMPONENT =====
@@ -78,10 +81,11 @@ function AnimatedRoutes() {
         <Route path="/literary" element={<Literary />} />
         <Route path="/article" element={<Showarticles />} />
         <Route path="/article/:id" element={<FullArticles />} />
-        <Route path="/contact-us" element={<ContactUs />} />
+        {/* <Route path="/contact-us" element={<ContactUs />} /> */}
         <Route path="/about" element={<About />} />
         <Route path="/account-deleted" element={<AccountDeleted />} />
         <Route path="/opinion" element={<Opinion />} />
+        {/* <Route path="/contact" element={<Contact />} /> */}
 
         {/* ================= ADMIN ROUTES ================= */}
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
@@ -103,7 +107,10 @@ function AnimatedRoutes() {
         <Route path="/coordinator/audit-trail" element={<CoordinatorAuditTrail />} />
 
 
-        {/* ================= SIDENAV ROUTES ================= */}
+        {/* ================= Form ================= */}
+        {/* <Route path="/feedback" element={< Feedback  />} /> */}
+
+
 
         {/* LAST — wildcard */}
         <Route path="*" element={<div>Page not found</div>} />

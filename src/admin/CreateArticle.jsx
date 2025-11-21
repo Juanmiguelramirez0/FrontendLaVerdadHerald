@@ -13,7 +13,7 @@ import {
 import { IconUpload } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import { notifications } from "@mantine/notifications";
-import { articles } from "../data/articles";
+import { articles } from "../data/Articles.js";
 import AdminHeader from "../components/AdminHeader";
 import AdminSidebar from "../components/AdminSidebar.jsx";
 

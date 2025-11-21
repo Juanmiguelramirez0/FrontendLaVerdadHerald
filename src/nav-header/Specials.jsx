@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { IconCalendar } from "@tabler/icons-react";
 import Header from "../components/Header.jsx";
-import { mainArticle, otherArticles } from "../data/Articles"; 
+import { mainArticle, otherArticles } from "../data/Articles.js"; 
 import bglandingpage from "../assets/bglandingpage.png";
 
 export default function Special() {

@@ -15,7 +15,7 @@ import {
 } from "@mantine/core";
 import { IconEdit, IconCalendar, IconExternalLink } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
-import { articles } from "../data/articles";
+import { articles } from "../data/Articles.js";
 import CoordinatorMainHeader from "../components/CoordinatorMainHeader.jsx";
 import { motion } from "framer-motion";
 

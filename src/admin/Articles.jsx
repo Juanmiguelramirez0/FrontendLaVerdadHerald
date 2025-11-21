@@ -20,7 +20,7 @@ import { IconCheck, IconThumbUp, IconBrandFacebook, IconLink, IconEdit, IconTras
 import AdminHeader from "../components/AdminHeader";
 import Footer from "../components/Footer";
 import Literary1 from "../assets/Literary1.png"; 
-import { Literary } from "../data/articles";
+import { Literary } from "../data/Articles";
 
 function ArticlePage() {
   const [likes, setLikes] = useState(5); // initial likes

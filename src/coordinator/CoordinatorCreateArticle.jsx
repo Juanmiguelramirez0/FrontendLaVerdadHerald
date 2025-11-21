@@ -13,7 +13,7 @@ import {
 import { IconUpload } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import { notifications } from "@mantine/notifications";
-import { articles } from "../data/articles.js";
+import { articles } from "../data/Articles.js";
 import CoordinatorHeader from "../components/CoordinatorHeader.jsx";
 import CoordinatorSidebar from "../components/CoordinatorSidebar.jsx";
 import { motion } from "framer-motion";

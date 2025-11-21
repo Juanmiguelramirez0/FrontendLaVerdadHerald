@@ -4,7 +4,7 @@ import { Container, Title, Text, Image, Group, Box, Badge } from "@mantine/core"
 import { IconCalendar } from "@tabler/icons-react";
 import Header from "../components/Header.jsx";
 import Footer from "../components/Footer.jsx";
-import { articles } from "../data/articles";
+import { articles } from "../data/Articles.js";
 
 export default function FullArticles() {
   const { id } = useParams(); // get article ID from URL

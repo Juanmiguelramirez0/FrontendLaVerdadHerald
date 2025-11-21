@@ -15,7 +15,7 @@ import { motion } from "framer-motion";
 import { IconCalendar } from "@tabler/icons-react";
 import Header from "../components/Header.jsx";
 import Footer from "../components/Footer.jsx";
-import { articles, mainArticle, otherArticles } from "../data/articles";
+import { articles, mainArticle, otherArticles } from "../data/Articles.js";
 
 export default function Dashboard() {
   const navigate = useNavigate();
